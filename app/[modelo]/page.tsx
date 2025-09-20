@@ -83,12 +83,7 @@ export default async function ModeloPage({ params }: ModeloPageProps) {
               </div>
             </div>
 
-            {product.Notas && (
-              <div className="mt-6 border-t border-slate-700 pt-4">
-                <h3 className="font-semibold text-lg mb-2">Notas Adicionales</h3>
-                <p className="text-slate-400">{product.Notas}</p>
-              </div>
-            )}
+            
           </div>
         </div>
       </div>
