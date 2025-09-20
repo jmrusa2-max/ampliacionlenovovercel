@@ -12,7 +12,7 @@ export async function GET(request: Request) {
   try {
     const models = await getSheetData(); // ✅ CORRECTO: usamos la función que YA FUNCIONA
     const filtered = models.filter(model =>
-      model.Modelo.toLowerCase().includes(query)
+      model.modelo.toLowerCase().includes(query)
     );
     return NextResponse.json(filtered);
   } catch (error) {
