@@ -1,0 +1,29 @@
+// components/SearchBar.tsx
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export function SearchBar() {
+  const [query, setQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (query.trim()) {
+      router.push(`/${encodeURIComponent(query.trim())}`);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSearch} className="w-full max-w-lg mx-auto">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Ingresa el numero de articulo o SKU"
+        className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-200 placeholder:text-slate-400"
+      />
+    </form>
+  );
+}
