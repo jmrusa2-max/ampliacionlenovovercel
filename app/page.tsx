@@ -2,6 +2,7 @@
 // ¡NO debe tener 'use client'!
 
 import SearchBar from '@/components/SearchBar';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -13,9 +14,9 @@ export default function HomePage() {
         <SearchBar />
 
         <div className="mt-8 text-center">
-          <a href="/CM4774" className="text-blue-400 hover:text-blue-300 inline-block">
+          <Link href="/CM4774" className="text-blue-400 hover:text-blue-300 inline-block">
             Ver ejemplo de producto
-          </a>
+          </Link>
         </div>
       </div>
     </div>
