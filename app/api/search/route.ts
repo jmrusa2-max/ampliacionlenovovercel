@@ -1,4 +1,6 @@
-import { getSheetData } from '@/lib/googleSheets'; // ✅ CORRECTO: esta función SÍ existe
+// app/api/search/route.ts
+
+import { getSheetData } from '@/lib/googleSheets';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -10,9 +12,9 @@ export async function GET(request: Request) {
   }
 
   try {
-    const models = await getSheetData(); // ✅ CORRECTO: usamos la función que YA FUNCIONA
+    const models = await getSheetData();
     const filtered = models.filter(model =>
-      model.modelo.toLowerCase().includes(query)
+      model.Modelo.toLowerCase().includes(query) // Filtra por Modelo (tu SKU)
     );
     return NextResponse.json(filtered);
   } catch (error) {
