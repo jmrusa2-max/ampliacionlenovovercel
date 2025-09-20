@@ -8,6 +8,7 @@ export interface Device {
   Soporta_RAM: string;
   RAM_Max_GB: string;
   Slots_RAM: string;
+  ram_slots_ocupados: number; // Nuevo campo
   Tipo_RAM: string;
   Soporta_Almacenamiento: string;
   Tipo_Almacenamiento: string;

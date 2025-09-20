@@ -34,6 +34,14 @@ export default async function ModeloPage({ params }: ModeloPageProps) {
   const ramSupport = product.Soporta_RAM?.toUpperCase() === 'SI';
   const storageSupport = product.Soporta_Almacenamiento?.toUpperCase() === 'SI';
 
+  // --- Calculation for free RAM slots ---
+  let ramSlotsLibres = 0;
+  if (ramSupport) {
+    const totalSlots = parseInt(product.Slots_RAM, 10) || 0;
+    const occupiedSlots = product.ram_slots_ocupados || 0;
+    ramSlotsLibres = totalSlots - occupiedSlots;
+  }
+
   return (
     <div className="min-h-screen bg-slate-900 text-slate-200 p-4 sm:p-6">
       <div className="max-w-4xl mx-auto">
@@ -56,8 +64,10 @@ export default async function ModeloPage({ params }: ModeloPageProps) {
                 </div>
                 {ramSupport ? (
                   <div className="space-y-2 text-slate-400">
-                    <p><strong>Máximo:</strong> {product.RAM_Max_GB} GB</p>
-                    <p><strong>Slots:</strong> {product.Slots_RAM}</p>
+                    <p><strong>Total de Slots:</strong> {product.Slots_RAM}</p>
+                    <p><strong>Slots Ocupados:</strong> {product.ram_slots_ocupados}</p>
+                    <p><strong>Slots Libres:</strong> {ramSlotsLibres}</p>
+                    <p><strong>RAM Máxima:</strong> {product.RAM_Max_GB} GB</p>
                     <p><strong>Tipo:</strong> {product.Tipo_RAM}</p>
                   </div>
                 ) : (
