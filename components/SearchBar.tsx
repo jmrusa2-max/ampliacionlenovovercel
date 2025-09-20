@@ -12,6 +12,8 @@ export default function SearchBar() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
+      // Simply redirect to the SKU page. The page itself will handle
+      // fetching the data and showing a 404 if not found.
       router.push(`/${encodeURIComponent(query.trim())}`);
     }
   };

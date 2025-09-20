@@ -1,16 +1,24 @@
-// app/[sku]/page.tsx
-// ¡NO debe tener 'use client'!
 
-import { getSheetData } from '@/lib/googleSheets';
+// app/[sku]/page.tsx
+import { getDeviceByModel } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
-export default async function ProductPage({ params }: { params: { sku: string } }) {
-  const sku = params.sku;
-  const data = await getSheetData();
+// This page will be dynamically rendered to ensure it always has fresh data
+export const dynamic = 'force-dynamic';
 
-  const product = data.find((item) => item.Modelo === sku);
+interface ModeloPageProps {
+  params: { modelo: string };
+}
 
+export default async function ModeloPage({ params }: ModeloPageProps) {
+  // Decode the SKU from the URL, as it might contain special characters
+  const modelo = decodeURIComponent(params.modelo);
+  
+  // Fetch only the specific device from the database, which is very fast
+  const product = await getDeviceByModel(modelo);
+
+  // If no product is found for the given SKU, show a 404 page
   if (!product) {
     notFound();
   }
