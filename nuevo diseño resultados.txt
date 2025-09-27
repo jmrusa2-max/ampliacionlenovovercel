@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control de Ampliaciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados y animaciones */
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #0B1120; /* Un azul casi negro para el fondo */
+        }
+        .font-fira {
+            font-family: 'Fira Code', monospace;
+        }
+        /* Animación de pulso para indicadores activos */
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 15px 0px rgba(74, 222, 128, 0.4); }
+            50% { box-shadow: 0 0 25px 8px rgba(74, 222, 128, 0.6); }
+        }
+        .animate-pulse-green {
+            animation: pulse-green 2.5s infinite;
+        }
+        /* Transiciones suaves para las barras de progreso */
+        .progress-bar-inner {
+            transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+    </style>
+</head>
+<body class="text-slate-200 p-4 sm:p-6 flex items-center justify-center min-h-screen">
+
+    <div class="max-w-5xl w-full mx-auto">
+        <!-- Controles para cambiar de producto -->
+        <div class="flex justify-center items-center gap-4 mb-6">
+            <span class="font-semibold">Ver ejemplo:</span>
+            <button id="btn-thinkpad" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400">ThinkPad T14</button>
+            <button id="btn-macbook" class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500">MacBook Air M1</button>
+        </div>
+
+        <!-- El Panel de Control Principal -->
+        <div id="dashboard" class="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl shadow-2xl shadow-cyan-500/5 overflow-hidden">
+            
+            <!-- Encabezado del Producto -->
+            <div class="p-6 text-center border-b border-slate-700">
+                <h1 id="product-brand" class="text-3xl font-bold text-white transition-all duration-500"></h1>
+                <p id="product-model" class="text-slate-400 text-lg transition-all duration-500"></p>
+            </div>
+            
+            <!-- Grid de Componentes -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-slate-700">
+                
+                <!-- Panel de RAM -->
+                <div class="bg-slate-800/80 p-6 flex flex-col gap-6">
+                    <h2 class="text-xl font-semibold text-white">Memoria RAM</h2>
+                    <!-- Indicador de Estado -->
+                    <div class="flex items-center gap-4">
+                        <div id="ram-status-indicator" class="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500">
+                            <svg id="ram-status-icon" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>
+                        </div>
+                        <span id="ram-status-text" class="text-2xl font-bold transition-colors duration-500"></span>
+                    </div>
+                    
+                    <!-- Visualización de Slots -->
+                    <div id="ram-slots-container">
+                        <h3 class="font-semibold text-slate-300 mb-2">Slots de Memoria</h3>
+                        <div id="ram-slots-visual" class="flex gap-2 h-8"></div>
+                    </div>
+                    
+                    <!-- Medidor de RAM Máxima -->
+                    <div id="ram-gauge-container">
+                         <div class="flex justify-between items-baseline mb-1">
+                            <h3 class="font-semibold text-slate-300">Capacidad Máxima Soportada</h3>
+                            <p class="font-fira text-lg font-semibold text-white"><span id="ram-max-value">0</span> GB</p>
+                        </div>
+                        <div class="w-full bg-slate-700 rounded-full h-4 overflow-hidden">
+                            <div id="ram-progress-bar" class="progress-bar-inner h-4 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Mensaje de Info -->
+                    <p id="ram-info-text" class="text-slate-400 text-center min-h-[40px]"></p>
+                </div>
+
+                <!-- Panel de Almacenamiento -->
+                <div class="bg-slate-800/80 p-6 flex flex-col gap-6">
+                    <h2 class="text-xl font-semibold text-white">Almacenamiento</h2>
+                     <!-- Indicador de Estado -->
+                    <div class="flex items-center gap-4">
+                        <div id="storage-status-indicator" class="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500">
+                           <svg id="storage-status-icon" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>
+                        </div>
+                        <span id="storage-status-text" class="text-2xl font-bold transition-colors duration-500"></span>
+                    </div>
+                    
+                    <!-- Detalles del Almacenamiento -->
+                     <div id="storage-details-container">
+                        <h3 class="font-semibold text-slate-300 mb-2">Tipo de Conexión Principal</h3>
+                        <div id="storage-type-visual" class="bg-slate-700/50 rounded-lg p-3 text-center">
+                            <p id="storage-type-text" class="font-fira text-lg text-cyan-300"></p>
+                        </div>
+                    </div>
+
+                     <!-- Medidor de Almacenamiento Máximo -->
+                    <div id="storage-gauge-container">
+                        <div class="flex justify-between items-baseline mb-1">
+                            <h3 class="font-semibold text-slate-300">Capacidad Máxima Soportada</h3>
+                            <p class="font-fira text-lg font-semibold text-white"><span id="storage-max-value">0</span></p>
+                        </div>
+                        <div class="w-full bg-slate-700 rounded-full h-4 overflow-hidden">
+                            <div id="storage-progress-bar" class="progress-bar-inner h-4 rounded-full"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mensaje de Info -->
+                    <p id="storage-info-text" class="text-slate-400 text-center min-h-[40px]"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Mock de Datos ---
+        const productData = {
+            thinkpad: {
+                brand: 'Lenovo',
+                model: 'ThinkPad T14 Gen 2',
+                ram: {
+                    support: true,
+                    totalSlots: 2,
+                    occupiedSlots: 1,
+                    maxGB: 64,
+                    type: 'DDR4 SODIMM'
+                },
+                storage: {
+                    support: true,
+                    maxTotal: '2 TB',
+                    type: 'NVMe M.2 2280'
+                }
+            },
+            macbook: {
+                brand: 'Apple',
+                model: 'MacBook Air M1',
+                ram: {
+                    support: false,
+                    totalSlots: 0,
+                    occupiedSlots: 0,
+                    maxGB: 16,
+                    type: 'LPDDR4X (Soldada)'
+                },
+                storage: {
+                    support: false,
+                    maxTotal: '2 TB',
+                    type: 'SSD Integrado (Soldado)'
+                }
+            }
+        };
+
+        // --- Referencias a Elementos del DOM ---
+        const ui = {
+            brand: document.getElementById('product-brand'),
+            model: document.getElementById('product-model'),
+            ram: {
+                statusIndicator: document.getElementById('ram-status-indicator'),
+                statusIcon: document.getElementById('ram-status-icon'),
+                statusText: document.getElementById('ram-status-text'),
+                slotsContainer: document.getElementById('ram-slots-container'),
+                slotsVisual: document.getElementById('ram-slots-visual'),
+                gaugeContainer: document.getElementById('ram-gauge-container'),
+                maxValue: document.getElementById('ram-max-value'),
+                progressBar: document.getElementById('ram-progress-bar'),
+                infoText: document.getElementById('ram-info-text')
+            },
+            storage: {
+                statusIndicator: document.getElementById('storage-status-indicator'),
+                statusIcon: document.getElementById('storage-status-icon'),
+                statusText: document.getElementById('storage-status-text'),
+                detailsContainer: document.getElementById('storage-details-container'),
+                typeText: document.getElementById('storage-type-text'),
+                gaugeContainer: document.getElementById('storage-gauge-container'),
+                maxValue: document.getElementById('storage-max-value'),
+                progressBar: document.getElementById('storage-progress-bar'),
+                infoText: document.getElementById('storage-info-text')
+            }
+        };
+        
+        // --- Iconos SVG ---
+        const icons = {
+            check: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>',
+            cross: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+        };
+
+        // --- Función para animar números ---
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerText = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // --- Función principal para actualizar el Dashboard ---
+        function updateDashboard(product) {
+            // Actualizar encabezado
+            ui.brand.innerText = product.brand;
+            ui.model.innerText = product.model;
+
+            // --- Lógica para RAM ---
+            if (product.ram.support) {
+                // Estilos para 'Ampliable'
+                ui.ram.statusIndicator.className = 'w-16 h-16 rounded-full flex items-center justify-center bg-green-500/10 text-green-400 animate-pulse-green';
+                ui.ram.statusIcon.innerHTML = icons.check;
+                ui.ram.statusText.innerText = 'Ampliable';
+                ui.ram.statusText.className = 'text-2xl font-bold text-green-400';
+                ui.ram.progressBar.className = 'progress-bar-inner h-4 rounded-full bg-gradient-to-r from-green-500 to-cyan-500';
+                ui.ram.infoText.innerText = `Este equipo tiene slots disponibles para expansión.`;
+                
+                // Mostrar elementos visuales
+                ui.ram.slotsContainer.style.display = 'block';
+                ui.ram.gaugeContainer.style.display = 'block';
+                
+                // Dibujar slots
+                ui.ram.slotsVisual.innerHTML = '';
+                for (let i = 0; i < product.ram.totalSlots; i++) {
+                    const slot = document.createElement('div');
+                    slot.className = `w-full rounded ${i < product.ram.occupiedSlots ? 'bg-cyan-500' : 'bg-slate-700/50 border-2 border-dashed border-slate-600'}`;
+                    ui.ram.slotsVisual.appendChild(slot);
+                }
+            } else {
+                // Estilos para 'No Ampliable'
+                ui.ram.statusIndicator.className = 'w-16 h-16 rounded-full flex items-center justify-center bg-red-500/10 text-red-400';
+                ui.ram.statusIcon.innerHTML = icons.cross;
+                ui.ram.statusText.innerText = 'No Ampliable';
+                ui.ram.statusText.className = 'text-2xl font-bold text-red-400';
+                ui.ram.progressBar.className = 'progress-bar-inner h-4 rounded-full bg-slate-600';
+                ui.ram.infoText.innerText = `La memoria viene soldada en placa y no puede ser modificada.`;
+
+                // Ocultar elementos visuales
+                ui.ram.slotsContainer.style.display = 'none';
+                ui.ram.gaugeContainer.style.display = 'none';
+            }
+            // Animar valor de RAM máxima y barra de progreso
+            animateValue(ui.ram.maxValue, 0, product.ram.maxGB, 800);
+            setTimeout(() => {
+                ui.ram.progressBar.style.width = product.ram.support ? `100%` : `0%`;
+            }, 100);
+
+
+            // --- Lógica para Almacenamiento ---
+            if (product.storage.support) {
+                // Estilos para 'Ampliable'
+                ui.storage.statusIndicator.className = 'w-16 h-16 rounded-full flex items-center justify-center bg-green-500/10 text-green-400 animate-pulse-green';
+                ui.storage.statusIcon.innerHTML = icons.check;
+                ui.storage.statusText.innerText = 'Ampliable';
+                ui.storage.statusText.className = 'text-2xl font-bold text-green-400';
+                ui.storage.progressBar.className = 'progress-bar-inner h-4 rounded-full bg-gradient-to-r from-green-500 to-cyan-500';
+                ui.storage.infoText.innerText = `Es posible cambiar o añadir unidades de almacenamiento.`;
+
+                // Mostrar elementos
+                ui.storage.detailsContainer.style.display = 'block';
+                ui.storage.gaugeContainer.style.display = 'block';
+                ui.storage.typeText.innerText = product.storage.type;
+            } else {
+                // Estilos para 'No Ampliable'
+                ui.storage.statusIndicator.className = 'w-16 h-16 rounded-full flex items-center justify-center bg-red-500/10 text-red-400';
+                ui.storage.statusIcon.innerHTML = icons.cross;
+                ui.storage.statusText.innerText = 'No Ampliable';
+                ui.storage.statusText.className = 'text-2xl font-bold text-red-400';
+                ui.storage.progressBar.className = 'progress-bar-inner h-4 rounded-full bg-slate-600';
+                ui.storage.infoText.innerText = `El almacenamiento está integrado y no puede ser modificado.`;
+                
+                // Ocultar elementos
+                ui.storage.detailsContainer.style.display = 'none';
+                ui.storage.gaugeContainer.style.display = 'none';
+            }
+            // Actualizar valor de almacenamiento
+            ui.storage.maxValue.innerText = product.storage.maxTotal;
+             setTimeout(() => {
+                ui.storage.progressBar.style.width = product.storage.support ? `100%` : `0%`;
+            }, 100);
+        }
+
+        // --- Event Listeners para los botones ---
+        const btnThinkpad = document.getElementById('btn-thinkpad');
+        const btnMacbook = document.getElementById('btn-macbook');
+
+        btnThinkpad.addEventListener('click', () => {
+            updateDashboard(productData.thinkpad);
+            btnThinkpad.classList.remove('bg-slate-700', 'hover:bg-slate-600');
+            btnThinkpad.classList.add('bg-blue-600', 'hover:bg-blue-500');
+            btnMacbook.classList.add('bg-slate-700', 'hover:bg-slate-600');
+            btnMacbook.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+        });
+
+        btnMacbook.addEventListener('click', () => {
+            updateDashboard(productData.macbook);
+            btnMacbook.classList.remove('bg-slate-700', 'hover:bg-slate-600');
+            btnMacbook.classList.add('bg-blue-600', 'hover:bg-blue-500');
+            btnThinkpad.classList.add('bg-slate-700', 'hover:bg-slate-600');
+            btnThinkpad.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+        });
+
+        // --- Carga inicial ---
+        window.addEventListener('load', () => {
+            updateDashboard(productData.thinkpad);
+        });
+
+    </script>
+
+</body>
+</html>

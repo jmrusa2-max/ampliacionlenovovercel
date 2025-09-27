@@ -1,0 +1,190 @@
+{
+  "designSystem": {
+    "name": "Lenovo Digital Vibe",
+    "version": "1.0",
+    "description": "Un sistema de diseño basado en el estilo visual de lenovo.com/ar/es/, enfocado en una estética limpia, corporativa y tecnológica.",
+    "palette": {
+      "primary": {
+        "red": {
+          "value": "#e2231a",
+          "usage": "Botones principales (CTAs), acentos, logos y elementos de marca que requieren atención."
+        }
+      },
+      "secondary": {
+        "blue": {
+          "value": "#0079c1",
+          "usage": "Enlaces, acentos secundarios, iconos informativos y banners promocionales."
+        }
+      },
+      "text": {
+        "primary": {
+          "value": "#2d2d2d",
+          "usage": "Títulos principales y texto de alta importancia."
+        },
+        "secondary": {
+          "value": "#595959",
+          "usage": "Cuerpo de texto, descripciones y párrafos."
+        },
+        "muted": {
+          "value": "#8c8c8c",
+          "usage": "Texto de menor jerarquía, leyendas, placeholders."
+        }
+      },
+      "background": {
+        "light": {
+          "value": "#f5f5f5",
+          "usage": "Fondo principal de la página para crear un lienzo limpio."
+        },
+        "white": {
+          "value": "#ffffff",
+          "usage": "Fondo para tarjetas, cabeceras y secciones de contenido principal."
+        },
+        "dark": {
+          "value": "#2d2d2d",
+          "usage": "Fondos para secciones de alto contraste, como el pie de página."
+        }
+      },
+      "status": {
+        "success": {
+          "value": "#166534",
+          "usage": "Mensajes de confirmación, feedback positivo."
+        },
+        "error": {
+          "value": "#991b1b",
+          "usage": "Mensajes de error, alertas."
+        }
+      }
+    },
+    "typography": {
+      "fontFamily": "'Inter', sans-serif",
+      "headings": {
+        "h1": {
+          "fontSize": "2.25rem",
+          "fontWeight": "700",
+          "lineHeight": "2.5rem",
+          "color": "palette.text.primary"
+        },
+        "h2": {
+          "fontSize": "1.875rem",
+          "fontWeight": "700",
+          "lineHeight": "2.25rem",
+          "color": "palette.text.primary"
+        },
+        "h3": {
+          "fontSize": "1.25rem",
+          "fontWeight": "600",
+          "lineHeight": "1.75rem",
+          "color": "palette.text.primary"
+        }
+      },
+      "body": {
+        "default": {
+          "fontSize": "1rem",
+          "fontWeight": "400",
+          "lineHeight": "1.5rem",
+          "color": "palette.text.secondary"
+        },
+        "small": {
+          "fontSize": "0.875rem",
+          "fontWeight": "400",
+          "lineHeight": "1.25rem",
+          "color": "palette.text.muted"
+        }
+      },
+      "links": {
+        "default": {
+          "color": "palette.secondary.blue",
+          "textDecoration": "none",
+          "hover": {
+            "textDecoration": "underline"
+          }
+        }
+      }
+    },
+    "layout": {
+      "container": {
+        "maxWidth": "1280px",
+        "padding": "1rem 2rem"
+      },
+      "spacingUnit": "0.25rem",
+      "gridGutter": "1.5rem"
+    },
+    "components": {
+      "buttons": {
+        "primary": {
+          "background": "palette.primary.red",
+          "color": "palette.background.white",
+          "borderRadius": "0.25rem",
+          "padding": "0.75rem 1.5rem",
+          "fontWeight": "600",
+          "hover": {
+            "background": "#c01a13"
+          }
+        },
+        "secondary": {
+          "background": "palette.background.white",
+          "color": "palette.primary.red",
+          "border": "2px solid",
+          "borderColor": "palette.primary.red",
+          "borderRadius": "0.25rem",
+          "padding": "0.625rem 1.5rem",
+          "fontWeight": "600",
+          "hover": {
+            "background": "#fff5f5"
+          }
+        }
+      },
+      "cards": {
+        "default": {
+          "background": "palette.background.white",
+          "borderRadius": "0.5rem",
+          "padding": "1.5rem",
+          "border": "1px solid #e5e7eb",
+          "boxShadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)"
+        }
+      },
+      "navigation": {
+        "header": {
+          "height": "4rem",
+          "background": "palette.background.white",
+          "boxShadow": "0 2px 4px rgba(0, 0, 0, 0.05)"
+        },
+        "sidebar": {
+          "width": "25%",
+          "background": "palette.background.white",
+          "borderRight": "1px solid #e5e7eb"
+        }
+      },
+      "inputs": {
+        "default": {
+          "padding": "0.75rem 1rem",
+          "borderRadius": "9999px",
+          "border": "1px solid #d1d5db",
+          "focus": {
+            "ring": "2px solid",
+            "ringColor": "palette.primary.red",
+            "borderColor": "transparent"
+          }
+        }
+      }
+    },
+    "patterns": {
+      "iconography": {
+        "style": "outline",
+        "strokeWidth": "1.5",
+        "size": "1.25rem",
+        "color": "palette.text.secondary"
+      },
+      "sectionHierarchy": {
+        "level1": {
+          "description": "Sección principal con título grande (h2) y contenido en tarjetas.",
+          "padding": "2.5rem 0"
+        },
+        "level2": {
+          "description": "Subsección dentro de una tarjeta con título mediano (h3).",
+          "padding": "1.5rem 0"
+        }
+      }
+    }
+  }
+}

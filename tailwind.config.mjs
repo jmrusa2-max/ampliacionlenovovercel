@@ -6,7 +6,15 @@ const config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Lexend', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
+      colors: {
+        'deep-blue': '#0B1120',
+      },
+    },
   },
   plugins: [],
 };

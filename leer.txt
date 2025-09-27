@@ -1,0 +1,3 @@
+base datos en supabase jrincon.lenovo
+GitHub jmrusa2 https://github.com/jmrusa2-max/ampliacionlenovovercel
+vercel jmrusa2
