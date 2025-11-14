@@ -13,9 +13,9 @@ interface ModeloPageProps {
 
 export default async function ModeloPage({ params }: ModeloPageProps) {
   const modelo = decodeURIComponent(params.modelo);
-  const product = await getDeviceByModel(modelo);
+  const device = await getDeviceByModel(modelo);
 
-  if (!product) {
+  if (!device) {
     notFound();
   }
 
@@ -27,7 +27,7 @@ export default async function ModeloPage({ params }: ModeloPageProps) {
         </Link>
 
         <div className="bg-slate-800 rounded-xl shadow-2xl overflow-hidden">
-          <DeviceResultWrapper product={product} />
+          <DeviceResultWrapper device={device} />
         </div>
       </div>
     </div>
