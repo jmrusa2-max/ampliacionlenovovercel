@@ -1,8 +1,4 @@
-// app/page.tsx
-// ¡NO debe tener 'use client'!
-
 import SearchBar from '@/components/SearchBar';
-import Link from 'next/link';
 
 export default function HomePage() {
   return (

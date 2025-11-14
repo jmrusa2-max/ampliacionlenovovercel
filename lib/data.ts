@@ -1,20 +1,6 @@
 // lib/data.ts
 import { supabase } from './supabaseClient';
-
-export interface Device {
-  Modelo: string;
-  Marca: string;
-  Tipo_Dispositivo: string;
-  Soporta_RAM: string;
-  RAM_Max_GB: string;
-  Slots_RAM: string;
-  ram_slots_ocupados: number; // Nuevo campo
-  Tipo_RAM: string;
-  Soporta_Almacenamiento: string;
-  Tipo_Almacenamiento: string;
-  Almacenamiento_Maximo_Total: string;
-  Notas?: string;
-}
+import { Device } from '@/types';
 
 export async function getDevices(): Promise<Device[]> {
   const { data, error } = await supabase
