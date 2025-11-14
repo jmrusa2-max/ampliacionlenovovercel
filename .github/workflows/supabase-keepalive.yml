@@ -1,29 +1,26 @@
 name: Supabase Keep-Alive
 
 on:
-  # Ejecuta cada 3 días (dentro del límite seguro de 7 días)
   schedule:
-    - cron: "0 3 */3 * *"   # 03:00 UTC cada 3 días → ~8 veces/mes
-  # Permite ejecutar manualmente desde GitHub UI
+    - cron: "0 3 */3 * *"   # cada 3 días a las 03:00 UTC
   workflow_dispatch:
 
 jobs:
   ping-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: 📡 Ping Supabase health endpoint
+      - name: 📡 Ping Supabase via /devices
         run: |
-          echo "📡 Sending keep-alive ping to Supabase..."
-          URL="https://${{ secrets.SUPABASE_PROJECT_REF }}.supabase.co/rest/v1/health"
+          echo "📡 Pinging Supabase to prevent auto-pause..."
+          URL="https://${{ secrets.SUPABASE_PROJECT_REF }}.supabase.co/rest/v1/devices"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            "$URL"
+            "$URL?limit=1"
           )
           echo "HTTP Status: $STATUS"
-          if [ "$STATUS" -eq 200 ]; then
+          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 206 ]; then
             echo "✅ Success: Project is active."
           else
-            echo "❌ Error: HTTP $STATUS — check your Supabase credentials or project status."
+            echo "❌ Error: HTTP $STATUS — check Supabase project status."
             exit 1
           fi
