@@ -20,7 +20,7 @@ interface Product {
   Tipo_RAM?: string;
   Almacenamiento_Maximo_Total?: string;
   Tipo_Almacenamiento?: string;
-  [key: string]: any; // Allow other properties for flexibility
+  [key: string]: unknown; // Allow other properties for flexibility
 }
 
 interface DeviceResultWrapperProps {
