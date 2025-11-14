@@ -7,20 +7,17 @@ import { CheckIcon } from './icons/CheckIcon';
 import { XIcon } from './icons/XIcon';
 
 
-// NOTE: This interface is based on the actual data structure returned by the database,
-// which uses PascalCase for property names, differing from the snake_case in types/index.ts.
 interface Product {
   Marca: string;
   Modelo: string;
-  Soporta_RAM?: 'SI' | 'NO';
-  Soporta_Almacenamiento?: 'SI' | 'NO';
+  Soporta_RAM?: 'SÍ' | 'NO';
+  Soporta_Almacenamiento?: 'SÍ' | 'NO';
   Slots_RAM?: string;
   ram_slots_ocupados?: number;
   RAM_Max_GB?: number;
   Tipo_RAM?: string;
   Almacenamiento_Maximo_Total?: string;
   Tipo_Almacenamiento?: string;
-  [key: string]: unknown; // Allow other properties for flexibility
 }
 
 interface DeviceResultWrapperProps {
@@ -30,8 +27,8 @@ interface DeviceResultWrapperProps {
 export default function DeviceResultWrapper({ product }: DeviceResultWrapperProps) {
   const [showDetails, setShowDetails] = useState(false);
 
-  const ramSupport = product.Soporta_RAM?.toUpperCase() === 'SI';
-  const storageSupport = product.Soporta_Almacenamiento?.toUpperCase() === 'SI';
+  const ramSupport = product.Soporta_RAM === 'SÍ';
+  const storageSupport = product.Soporta_Almacenamiento === 'SÍ';
 
   // --- Calculation for free RAM slots (moved from page.tsx) ---
   let ramSlotsLibres = 0;
