@@ -1,0 +1,5 @@
+id,Modelo,Marca,Tipo_Dispositivo,Soporta_RAM,RAM_Max_GB,Slots_RAM,Tipo_RAM,Soporta_Almacenamiento,Tipo_Almacenamiento,Almacenamiento_Maximo_Total,Notas,created_at,ram_slots_ocupados
+1,364614,LOQ E 83LK0018AR,Notebook,SI,32,1,DDR5,SI,NVMe_M2,2 TB,Tiene 2 slots de almacenamiento,2025-09-20 09:10:24.867905+00,1
+2,CM4774,LOQ E 83LK0018AR,Notebook,SI,32,1,DDR5,SI,NVMe_M2,2 TB,Tiene 2 slots de almacenamiento,2025-09-20 09:10:24.867905+00,1
+3,364774,IDEAPAD SLIM 3 82XQ00LVAR,Notebook,NO,,,DDR5,SI,NVMe_M2,1 TB,Tiene 1 slot de almacenamiento,2025-09-20 09:10:24.867905+00,0
+4,CM4707,IDEAPAD SLIM 3 82XQ00LVAR,Notebook,NO,,,DDR5,SI,NVMe_M2,1 TB,Tiene 1 slot de almacenamiento,2025-09-20 09:10:24.867905+00,0
