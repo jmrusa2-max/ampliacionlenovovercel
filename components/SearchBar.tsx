@@ -20,21 +20,19 @@ export default function SearchBar() {
 
   return (
     <form onSubmit={handleSearch} className="w-full max-w-md mx-auto">
-      <div className="relative">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Ingresa el número de artículo o SKU"
-          className="w-full px-4 py-3 pr-12 bg-slate-800 border border-slate-600 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-200 placeholder:text-slate-400"
-        />
-        <button
-          type="submit"
-          className="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-slate-200"
-        >
-          <MagnifyingGlassIcon className="h-5 w-5" />
-        </button>
-      </div>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Ingresa el número de articulo o SKU"
+        className="w-full px-4 py-3 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/90 backdrop-blur-sm text-gray-900 placeholder:text-gray-500"
+      />
+      <button
+        type="submit"
+        className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+      >
+        Consultar
+      </button>
     </form>
   );
 }

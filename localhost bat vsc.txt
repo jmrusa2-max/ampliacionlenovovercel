@@ -1,0 +1,71 @@
+Paso 1: Abre la terminal integrada de VS Code
+En VS Code, ve a:
+Terminal > New Terminal
+(o presiona Ctrl + `)
+Asegúrate de que estés en la raíz de tu proyecto (donde está package.json y dev-auto-stop-4min.bat).
+→ Deberías ver algo como:
+bash
+
+
+1
+C:\Users\TuUsuario\Documents\mi-proyecto>
+🔍 ¿No ves el .bat? Ejecuta dir (Windows) o ls (WSL) para listar archivos y confirmar que está ahí. 
+
+✅ Paso 2: Ejecuta el .bat desde la terminal
+🔹 En PowerShell (predeterminado en VS Code en Windows):
+powershell
+
+
+1
+.\dev-auto-stop-4min.bat
+🔹 En CMD (si usas cmd.exe como terminal):
+cmd
+
+
+1
+dev-auto-stop-4min.bat
+✅ No necesitas ./ ni start — VS Code ya está en la carpeta correcta. 
+
+🎯 ¿Qué verás?
+log
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+PS C:\...\mi-proyecto> .\dev-auto-stop-4min.bat
+
+🚀 Servidor iniciado en http://localhost:3000
+⏳ Se cerrará automáticamente en 4 minutos.
+💡 Para cerrar antes: presiona Ctrl + C aquí, o cierra esta ventana.
+
+> next dev
+- ready on http://localhost:3000
+➡️ El servidor se inicia dentro de la misma terminal, como si hubieras hecho npm run dev…
+➡️ Pero con el temporizador funcionando en segundo plano.
+
+✅ Paso 3: Cierre manual (cuando quieras)
+Con el foco en la terminal de VS Code:
+➡️ Presiona Ctrl + C
+→ Verás:
+
+log
+
+
+1
+2
+3
+4
+5
+^C
+info  - Gracefully stopping... (press Ctrl+C again to force)
+info  - Stopped
+✅ localhost:3000 cerrado automáticamente.
+Presione una tecla para continuar . . .
+✅ Listo: cierre limpio, sin procesos huérfanos.
+

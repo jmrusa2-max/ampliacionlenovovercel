@@ -20,15 +20,9 @@ export default async function ModeloPage({ params }: ModeloPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-200 p-4 sm:p-6">
-      <div className="max-w-4xl mx-auto">
-        <Link href="/" className="text-blue-400 hover:text-blue-300 mb-6 inline-block transition-colors">
-          ← Volver a la búsqueda
-        </Link>
-
-        <div className="bg-slate-800 rounded-xl shadow-2xl overflow-hidden">
-          <DeviceResultWrapper device={device} />
-        </div>
+    <div className="w-full max-w-4xl">
+      <div className="w-full bg-black/30 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+        <DeviceResultWrapper device={device} />
       </div>
     </div>
   );
