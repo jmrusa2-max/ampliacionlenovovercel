@@ -15,7 +15,11 @@ export async function searchDevice(query: string): Promise<Device | null> {
     .select(
       'part_number,Familia,Equipo,art_fravega,art_on_city,art_cetrogar,Tipo_Dispositivo,Soporta_RAM,RAM_Max_GB,Modulos_RAM,ram_modulos_ocupados,Tipo_RAM,Soporta_Almacenamiento,Tipo_Almacenamiento,Almacenamiento_Maximo_Total,Notas'
     )
-    .or(`art_fravega.eq.${query},art_on_city.eq.${query},art_cetrogar.eq.${query}`)
+    // --- CAMBIO TEMPORAL DE DEBUGGING ---
+    // Reemplazamos el .or(...) por un simple .eq()
+    // Si la búsqueda funciona con esto, el problema está en la sintaxis del .or() en Vercel.
+    .eq('art_on_city', query)
+    // ------------------------------------
     .limit(1);
 
   if (error) {
