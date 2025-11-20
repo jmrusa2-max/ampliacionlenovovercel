@@ -1,6 +1,7 @@
 // lib/data.ts
 import { supabase } from './supabaseClient';
-import { Device } from '@/types';
+// Asegúrate de que este tipo de dato (Device) contenga todas las propiedades seleccionadas
+import { Device } from '@/types'; 
 
 export async function getDevices(): Promise<Device[]> {
   // Esta función se deja intencionalmente vacía.
@@ -10,13 +11,10 @@ export async function getDevices(): Promise<Device[]> {
 }
 
 export async function searchDevice(query: string): Promise<Device | null> {
-  // 1. Aseguramos que el valor de la query sea un string válido y eliminamos espacios
-  //    al inicio/final para una búsqueda más limpia.
+  // Se normaliza la búsqueda para evitar problemas con espacios.
   const safeQuery = query.trim();
 
-  // 2. Construimos la cláusula .or() con la sintaxis de string que ha demostrado
-  //    ser más compatible y robusta en entornos de producción (Vercel).
-  //    Buscamos el valor exacto (.eq.) en las tres columnas de artículos.
+  // Se restablece la condición .or() completa, que es la funcionalidad final.
   const orCondition = `
     art_fravega.eq.${safeQuery},
     art_on_city.eq.${safeQuery},
@@ -24,20 +22,20 @@ export async function searchDevice(query: string): Promise<Device | null> {
   `;
 
   const { data, error } = await supabase
-    .from('devices') // Nombre de tabla verificado
+    .from('devices') // Nombre de la tabla de la nueva BD
     .select(
+      // Se seleccionan todas las columnas de tu CSV
       'part_number,Familia,Equipo,art_fravega,art_on_city,art_cetrogar,Tipo_Dispositivo,Soporta_RAM,RAM_Max_GB,Modulos_RAM,ram_modulos_ocupados,Tipo_RAM,Soporta_Almacenamiento,Tipo_Almacenamiento,Almacenamiento_Maximo_Total,Notas'
-    ) // Columnas verificadas con el CSV
-    .or(orCondition) // Aplicamos la condición robusta
+    )
+    .or(orCondition) // Aplicamos la condición OR
     .limit(1);
 
   if (error) {
-    console.error('Error fetching device by article code:', error); 
+    console.error('Error fetching device by article code:', error);
     return null;
   }
 
   if (!data || data.length === 0) {
-    // Si no se encuentran datos, retorna null (provocando el 404/Inexistente).
     return null;
   }
 
