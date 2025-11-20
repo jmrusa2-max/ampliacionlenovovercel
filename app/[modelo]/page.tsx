@@ -1,5 +1,5 @@
 // app/[modelo]/page.tsx
-import { getDeviceByModel } from '@/lib/data';
+import { searchDevice } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import DeviceResultWrapper from '@/components/DeviceResultWrapper';
@@ -12,8 +12,9 @@ interface ModeloPageProps {
 }
 
 export default async function ModeloPage({ params }: ModeloPageProps) {
-  const modelo = decodeURIComponent(params.modelo);
-  const device = await getDeviceByModel(modelo);
+  const resolvedParams = await params;
+  const modelo = decodeURIComponent(resolvedParams.modelo);
+  const device = await searchDevice(modelo);
 
   if (!device) {
     notFound();

@@ -1,12 +1,16 @@
 // types/index.ts
 export interface Device {
-  Modelo: string;
-  Marca: string;
+  part_number: string;
+  Familia: string;
+  Equipo: string;
+  art_fravega?: string;
+  art_on_city?: string;
+  art_cetrogar?: string;
   Tipo_Dispositivo: string;
   Soporta_RAM: 'SÍ' | 'NO' | 'SI';
   RAM_Max_GB: string;
-  Slots_RAM: string;
-  ram_slots_ocupados: number;
+  Modulos_RAM: string;
+  ram_modulos_ocupados: number;
   Tipo_RAM: string;
   Soporta_Almacenamiento: 'SÍ' | 'NO' | 'SI';
   Tipo_Almacenamiento: string;
