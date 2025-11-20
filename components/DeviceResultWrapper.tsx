@@ -12,9 +12,10 @@ import { Device } from '@/types';
 
 interface DeviceResultWrapperProps {
   device: Device;
+  searchTerm: string;
 }
 
-export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps) {
+export default function DeviceResultWrapper({ device, searchTerm }: DeviceResultWrapperProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   const ramSupport = device.Soporta_RAM === 'SÍ' || device.Soporta_RAM === 'SI';
@@ -33,8 +34,8 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
     return (
       <>
         <div className="p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Familia}</h1>
-          <p className="text-center text-slate-400 text-lg mb-6">{device.Equipo}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Equipo}</h1>
+          <p className="text-center text-slate-400 text-lg mb-6">{searchTerm}</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-300">
             {/* --- RAM Card --- */}
@@ -90,8 +91,8 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
   // --- Initial "SI/NO" View ---
   return (
     <div className="p-6 sm:p-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Familia}</h1>
-        <p className="text-center text-slate-400 text-lg mb-6">{device.Equipo}</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Equipo}</h1>
+        <p className="text-center text-slate-400 text-lg mb-6">{searchTerm}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <StatusCard type="RAM" isSupported={ramSupport} />
             <StatusCard type="Almacenamiento" isSupported={storageSupport} />
