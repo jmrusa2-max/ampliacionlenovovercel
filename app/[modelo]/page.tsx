@@ -23,7 +23,7 @@ export default async function ModeloPage({ params }: ModeloPageProps) {
   return (
     <div className="w-full max-w-4xl">
       <div className="w-full bg-black/30 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
-        <DeviceResultWrapper device={device} />
+        <DeviceResultWrapper device={device} searchTerm={modelo} />
       </div>
     </div>
   );
