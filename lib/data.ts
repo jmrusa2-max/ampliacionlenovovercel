@@ -3,32 +3,27 @@ import { supabase } from './supabaseClient';
 import { Device } from '@/types';
 
 export async function getDevices(): Promise<Device[]> {
-  const { data, error } = await supabase
-    .from('devices')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching devices from Supabase:', error);
-    return [];
-  }
-
-  return data || [];
+  // Esta función se deja intencionalmente vacía, ya que no se usa para la búsqueda principal.
+  return [];
 }
 
-export async function getDeviceByModel(modelo: string): Promise<Device | null> {
+export async function searchDevice(query: string): Promise<Device | null> {
+  const safeQuery = query.trim();
+
+  // ✅ CORREGIDO: Sin comillas manuales. Usa interpolación segura de Supabase.
+  // PostgREST interpreta automáticamente los valores como strings si las columnas son text.
   const { data, error } = await supabase
     .from('devices')
-    .select('*')
-    .ilike('Modelo', modelo) // Búsqueda insensible a mayúsculas/minúsculas
-    .single(); // Espera una sola fila, ideal para modelos únicos
+    .select(
+      'part_number,Familia,Equipo,art_fravega,art_on_city,art_cetrogar,Tipo_Dispositivo,Soporta_RAM,RAM_Max_GB,Modulos_RAM,ram_modulos_ocupados,Tipo_RAM,Soporta_Almacenamiento,Tipo_Almacenamiento,Almacenamiento_Maximo_Total,Notas'
+    )
+    .or(`art_fravega.eq.${safeQuery},art_on_city.eq.${safeQuery},art_cetrogar.eq.${safeQuery}`)
+    .limit(1);
 
   if (error) {
-    // No registrar "No se encontraron resultados" como un error, es un caso de uso normal
-    if (error.code !== 'PGRST116') { 
-      console.error('Error fetching device by model:', error);
-    }
+    console.error('[searchDevice] Error en Supabase:', error);
     return null;
   }
 
-  return data;
+  return data?.[0] ?? null;
 }
