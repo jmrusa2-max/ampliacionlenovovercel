@@ -51,21 +51,6 @@ export default function RootLayout({
           />
         </div>
 
-        {/* Header with Logo */}
-        <header className="absolute top-0 left-0 w-full p-4 z-20">
-          <div className="w-full max-w-7xl mx-auto">
-            <Link href="/">
-              <Image
-                src="/logo.png"
-                alt="Lenovo Logo"
-                width={130}
-                height={28}
-                className="h-7 w-auto" // Ajusta la altura y el ancho se ajustará automáticamente
-              />
-            </Link>
-          </div>
-        </header>
-
         {/* Page Content */}
         <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
           {children}

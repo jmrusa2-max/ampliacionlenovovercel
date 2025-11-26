@@ -7,6 +7,8 @@ import StatusCard from './StatusCard';
 import { CheckIcon } from './icons/CheckIcon';
 import { XIcon } from './icons/XIcon';
 
+import Tooltip from './Tooltip';
+
 
 import { Device } from '@/types';
 
@@ -49,7 +51,9 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
                 <div className="space-y-2 text-slate-400 text-center">
                   <div className="flex items-center justify-center gap-1">
                   <span><strong>Total de Módulos:</strong> {device.Modulos_RAM}</span>
-                  <span className="text-xs text-gray-500" title="Incluye módulos soldados y removibles">ℹ️</span>
+                  <Tooltip text="Incluye módulos soldados y removibles">
+                    <span className="text-xs text-gray-500">ℹ️</span>
+                  </Tooltip>
                 </div>
                   <p><strong>Módulos Ocupados:</strong> {device.ram_modulos_ocupados}</p>
                   <p><strong>Módulos Libres:</strong> {ramSlotsLibres}</p>

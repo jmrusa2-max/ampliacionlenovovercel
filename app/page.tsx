@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function HomePage() {
   return (
     <>
-      <div className="fixed top-4 left-4 z-30">
+      <div style={{ position: 'absolute', top: 0, left: 0 }}>
         <Image src="/logomini.png" alt="Lenovo Logo" width={40} height={40} />
       </div>
       <div className="w-full max-w-3xl bg-white/25 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-2xl p-8 text-center">
