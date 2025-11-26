@@ -47,14 +47,17 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
               </div>
               {ramSupport ? (
                 <div className="space-y-2 text-slate-400 text-center">
-                  <p><strong>Total de Módulos:</strong> {device.Modulos_RAM}</p>
+                  <div className="flex items-center justify-center gap-1">
+                  <span><strong>Total de Módulos:</strong> {device.Modulos_RAM}</span>
+                  <span className="text-xs text-gray-500" title="Incluye módulos soldados y removibles">ℹ️</span>
+                </div>
                   <p><strong>Módulos Ocupados:</strong> {device.ram_modulos_ocupados}</p>
                   <p><strong>Módulos Libres:</strong> {ramSlotsLibres}</p>
                   <p><strong>RAM Máxima:</strong> {device.RAM_Max_GB} GB</p>
                   <p><strong>Tipo:</strong> {device.Tipo_RAM}</p>
                 </div>
               ) : (
-                <p className="text-slate-400">La memoria de este equipo viene soldada en placa y no puede ser modificada.</p>
+                <p className="text-slate-400">La memoria RAM de este equipo no permite ser ampliada.</p>
               )}
             </div>
 
@@ -88,6 +91,9 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
                     Buscar otro artículo
                 </Link>
             </div>
+            <p className="text-xs text-gray-500 italic mt-4">
+                Los datos son a modo informativo, pueden variar sin previo aviso y no constituyen una oferta de venta.
+            </p>
         </div>
       </>
     );
@@ -114,6 +120,9 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
                 Buscar otro artículo
               </Link>
             </div>
+            <p className="text-xs text-gray-500 italic mt-4">
+                Los datos son a modo informativo, pueden variar sin previo aviso y no constituyen una oferta de venta.
+            </p>
         </div>
     </div>
   );
