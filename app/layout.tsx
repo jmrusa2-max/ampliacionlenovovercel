@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,7 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ampliación Memorias Lenovo",
   description: "Verifica si tu equipo Lenovo puede ampliar su garantía.",
-  icons: "/logomini.png",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -30,17 +31,29 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
       >
-        {/* Background Container */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden">
+        {/* ✅ Logo en la esquina superior izquierda (COMO EN CÓDIGO A) */}
+        <div className="absolute top-4 left-4 z-10"> 
           <Image
-            src="/diseñov2.png"
-            alt="Fondo abstracto"
-            layout="fill"
-            objectFit="cover"
-            quality={90}
-            className="translate-y-[75px]"
+            src="/logo.png"
+            alt="Lenovo Logo"
+            width={120}
+            height={40}
+            priority
           />
-          {/* Overlay & Vignette */}
+        </div>
+
+        {/* ✅ Fondo: ELIMINADA LA BARRA NEGRA */}
+        <div className="fixed inset-0 z-[-1] overflow-hidden"> 
+          <Image
+            src="/disenov2.jpg" // Corregido a .png (como en Código A)
+            alt="Fondo abstracto"
+            fill
+            style={{ objectFit: "cover" }}
+            quality={90}
+            // ❌ ELIMINADA: La clase translate-y-[75px] causaba el espacio negro superior.
+          />
+          
+          {/* Capas de Overlay y Viñeta */}
           <div className="absolute inset-0 bg-black/60" />
           <div
             className="absolute inset-0"
@@ -51,22 +64,7 @@ export default function RootLayout({
           />
         </div>
 
-        {/* Header with Logo */}
-        <header className="absolute top-0 left-0 w-full p-4 z-20">
-          <div className="w-full max-w-7xl mx-auto">
-            <Link href="/">
-              <Image
-                src="/logo.png"
-                alt="Lenovo Logo"
-                width={130}
-                height={28}
-                className="h-7 w-auto" // Ajusta la altura y el ancho se ajustará automáticamente
-              />
-            </Link>
-          </div>
-        </header>
-
-        {/* Page Content */}
+        {/* ✅ Contenido principal centrado */}
         <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
           {children}
         </main>

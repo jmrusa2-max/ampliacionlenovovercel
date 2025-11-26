@@ -9,7 +9,7 @@ interface StatusCardProps {
 
 export default function StatusCard({ type, isSupported }: StatusCardProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg bg-slate-800 p-6 shadow-lg">
+    <div className="flex flex-col items-center justify-center rounded-lg bg-slate-800/40 p-6 shadow-lg">
       <h2 className="text-xl font-semibold text-slate-200 mb-4">{type}</h2>
       {isSupported ? <CheckIcon /> : <XIcon />}
       <p className={`mt-4 text-2xl font-bold ${isSupported ? 'text-green-400' : 'text-red-400'}`}>
