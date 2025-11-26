@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,7 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ampliación Memorias Lenovo",
   description: "Verifica si tu equipo Lenovo puede ampliar su garantía.",
-  icons: "/logomini.png",
+  icons: {
+    icon: "/favicon.ico", // ✅ favicon.ico desde /public
+  },
 };
 
 export default function RootLayout({
@@ -30,13 +31,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
       >
-        {/* Background Container */}
+        {/* Background Container — corregido para Next.js 13+ */}
         <div className="fixed inset-0 z-[-1] overflow-hidden">
           <Image
             src="/diseñov2.png"
             alt="Fondo abstracto"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
             quality={90}
             className="translate-y-[75px]"
           />
