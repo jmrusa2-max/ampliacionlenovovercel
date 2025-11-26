@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link'; // Import Link
 import StatusCard from './StatusCard';
 import { CheckIcon } from './icons/CheckIcon';
 import { XIcon } from './icons/XIcon';
@@ -11,9 +12,10 @@ import { Device } from '@/types';
 
 interface DeviceResultWrapperProps {
   device: Device;
+  searchTerm: string;
 }
 
-export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps) {
+export default function DeviceResultWrapper({ device, searchTerm }: DeviceResultWrapperProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   const ramSupport = device.Soporta_RAM === 'SÍ' || device.Soporta_RAM === 'SI';
@@ -22,8 +24,8 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
   // --- Calculation for free RAM slots (moved from page.tsx) ---
   let ramSlotsLibres = 0;
   if (ramSupport) {
-    const totalSlots = parseInt(device.Slots_RAM || '0', 10);
-    const occupiedSlots = device.ram_slots_ocupados || 0;
+    const totalSlots = parseInt(device.Modulos_RAM || '0', 10);
+    const occupiedSlots = device.ram_modulos_ocupados || 0;
     ramSlotsLibres = totalSlots - occupiedSlots;
   }
 
@@ -32,8 +34,8 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
     return (
       <>
         <div className="p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">{device.Marca}</h1>
-          <p className="text-center text-slate-400 text-lg mb-6">{device.Modelo}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Equipo}</h1>
+          <p className="text-center text-slate-400 text-lg mb-6">{searchTerm}</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-300">
             {/* --- RAM Card --- */}
@@ -45,9 +47,9 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
               </div>
               {ramSupport ? (
                 <div className="space-y-2 text-slate-400">
-                  <p><strong>Total de Slots:</strong> {device.Slots_RAM}</p>
-                  <p><strong>Slots Ocupados:</strong> {device.ram_slots_ocupados}</p>
-                  <p><strong>Slots Libres:</strong> {ramSlotsLibres}</p>
+                  <p><strong>Total de Módulos:</strong> {device.Modulos_RAM}</p>
+                  <p><strong>Módulos Ocupados:</strong> {device.ram_modulos_ocupados}</p>
+                  <p><strong>Módulos Libres:</strong> {ramSlotsLibres}</p>
                   <p><strong>RAM Máxima:</strong> {device.RAM_Max_GB} GB</p>
                   <p><strong>Tipo:</strong> {device.Tipo_RAM}</p>
                 </div>
@@ -79,7 +81,7 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
                 onClick={() => setShowDetails(false)}
                 className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors"
             >
-                Volver
+                Ocultar detalles
             </button>
         </div>
       </>
@@ -89,8 +91,8 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
   // --- Initial "SI/NO" View ---
   return (
     <div className="p-6 sm:p-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">{device.Marca}</h1>
-        <p className="text-center text-slate-400 text-lg mb-6">{device.Modelo}</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Equipo}</h1>
+        <p className="text-center text-slate-400 text-lg mb-6">{searchTerm}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <StatusCard type="RAM" isSupported={ramSupport} />
             <StatusCard type="Almacenamiento" isSupported={storageSupport} />
@@ -102,6 +104,11 @@ export default function DeviceResultWrapper({ device }: DeviceResultWrapperProps
             >
             Ver más detalles
             </button>
+            <div className="mt-6">
+              <Link href="/" className="text-white/80 hover:text-white hover:underline transition-colors">
+                ← Volver a la búsqueda
+              </Link>
+            </div>
         </div>
     </div>
   );
