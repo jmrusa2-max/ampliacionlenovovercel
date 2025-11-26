@@ -31,8 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
       >
-        {/* ✅ Logo en la esquina superior izquierda (visible en todas las páginas) */}
-        <div className="absolute top-4 left-4 z-10">
+        {/* ✅ Logo en la esquina superior izquierda (COMO EN CÓDIGO A) */}
+        <div className="absolute top-4 left-4 z-10"> 
           <Image
             src="/logo.png"
             alt="Lenovo Logo"
@@ -42,17 +42,18 @@ export default function RootLayout({
           />
         </div>
 
-        {/* Background Container — corregido para Next.js 13+ */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden">
+        {/* ✅ Fondo: ELIMINADA LA BARRA NEGRA */}
+        <div className="fixed inset-0 z-[-1] overflow-hidden"> 
           <Image
-            src="/diseñov2.png"
+            src="/disenov2.jpg" // Corregido a .png (como en Código A)
             alt="Fondo abstracto"
             fill
             style={{ objectFit: "cover" }}
             quality={90}
-            className="translate-y-[75px]"
+            // ❌ ELIMINADA: La clase translate-y-[75px] causaba el espacio negro superior.
           />
-          {/* Overlay & Vignette */}
+          
+          {/* Capas de Overlay y Viñeta */}
           <div className="absolute inset-0 bg-black/60" />
           <div
             className="absolute inset-0"
@@ -63,7 +64,7 @@ export default function RootLayout({
           />
         </div>
 
-        {/* Page Content */}
+        {/* ✅ Contenido principal centrado */}
         <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
           {children}
         </main>
