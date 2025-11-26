@@ -39,14 +39,14 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-300">
             {/* --- RAM Card --- */}
-            <div className={`border rounded-lg p-4 transition-all ${ramSupport ? 'border-green-500/50' : 'border-red-500/50'}`}>
+            <div className={`border rounded-lg p-4 transition-all text-center bg-slate-800/40 ${ramSupport ? 'border-green-500/50' : 'border-red-500/50'}`}>
               <h2 className="text-xl font-semibold mb-3">Memoria RAM</h2>
-              <div className={`flex items-center text-lg font-medium mb-3 ${ramSupport ? 'text-green-400' : 'text-red-500'}`}>
+              <div className={`flex items-center justify-center text-lg font-medium mb-3 ${ramSupport ? 'text-green-400' : 'text-red-500'}`}>
                 {ramSupport ? <CheckIcon /> : <XIcon />}
                 <span className="ml-2">{ramSupport ? 'Ampliable' : 'No Ampliable'}</span>
               </div>
               {ramSupport ? (
-                <div className="space-y-2 text-slate-400">
+                <div className="space-y-2 text-slate-400 text-center">
                   <p><strong>Total de Módulos:</strong> {device.Modulos_RAM}</p>
                   <p><strong>Módulos Ocupados:</strong> {device.ram_modulos_ocupados}</p>
                   <p><strong>Módulos Libres:</strong> {ramSlotsLibres}</p>
@@ -59,14 +59,14 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
             </div>
 
             {/* --- Storage Card --- */}
-            <div className={`border rounded-lg p-4 transition-all ${storageSupport ? 'border-green-500/50' : 'border-red-500/50'}`}>
+            <div className={`border rounded-lg p-4 transition-all text-center bg-slate-800/40 ${storageSupport ? 'border-green-500/50' : 'border-red-500/50'}`}>
               <h2 className="text-xl font-semibold mb-3">Almacenamiento</h2>
-              <div className={`flex items-center text-lg font-medium mb-3 ${storageSupport ? 'text-green-400' : 'text-red-500'}`}>
+              <div className={`flex items-center justify-center text-lg font-medium mb-3 ${storageSupport ? 'text-green-400' : 'text-red-500'}`}>
                 {storageSupport ? <CheckIcon /> : <XIcon />}
                 <span className="ml-2">{storageSupport ? 'Ampliable' : 'No Ampliable'}</span>
               </div>
               {storageSupport ? (
-                <div className="space-y-2 text-slate-400">
+                <div className="space-y-2 text-slate-400 text-center">
                   <p><strong>Máximo Total:</strong> {device.Almacenamiento_Maximo_Total}</p>
                   <p><strong>Tipo:</strong> {device.Tipo_Almacenamiento}</p>
                 </div>
@@ -79,10 +79,15 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
         <div className="px-6 pb-6 text-center">
             <button
                 onClick={() => setShowDetails(false)}
-                className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors"
+                className="mt-4 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-transform transform hover:scale-105"
             >
                 Ocultar detalles
             </button>
+            <div className="mt-6">
+                <Link href="/" className="text-white/80 hover:text-white hover:underline transition-colors">
+                    Buscar otro artículo
+                </Link>
+            </div>
         </div>
       </>
     );
@@ -106,7 +111,7 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
             </button>
             <div className="mt-6">
               <Link href="/" className="text-white/80 hover:text-white hover:underline transition-colors">
-                ← Volver a la búsqueda
+                Buscar otro artículo
               </Link>
             </div>
         </div>
