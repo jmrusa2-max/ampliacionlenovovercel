@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ampliación Memorias Lenovo",
-  description: "Verifica si tu equipo Lenovo puede ampliar su garantía.",
+  description: "Verifica si un equipo Lenovo puede ampliar sus memorias.",
   icons: {
     icon: "/favicon.ico",
   },
