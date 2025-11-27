@@ -25,13 +25,13 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Ingresa el número de articulo o SKU"
-        className="w-full px-4 py-3 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/90 backdrop-blur-sm text-gray-900 placeholder:text-gray-500"
+        className="w-full px-4 py-3 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-[#FF4757] bg-white/90 backdrop-blur-sm text-gray-900 placeholder:text-gray-500"
       />
       <button
         type="submit"
-        className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+        className="mt-4 w-full bg-[#FF4757] hover:bg-[#E03B4B] text-white font-bold py-3 px-4 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-[#FF4757] focus:ring-opacity-50 transition-colors"
       >
-        Consultar
+        CONSULTAR
       </button>
     </form>
   );
