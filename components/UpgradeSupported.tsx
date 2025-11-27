@@ -21,7 +21,7 @@ export default function UpgradeSupported({ onShowDetails }: UpgradeSupportedProp
       <p className="text-slate-400 text-lg mb-6">Este equipo admite ampliación de RAM y/o almacenamiento.</p>
       <button
         onClick={onShowDetails}
-        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg"
+        className="bg-[#FF4757] hover:bg-[#E03B4B] text-white font-bold py-3 px-6 rounded-lg transition-colors text-lg shadow-lg shadow-red-900/20"
       >
         Ver más detalles
       </button>

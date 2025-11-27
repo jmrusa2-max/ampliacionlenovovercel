@@ -36,14 +36,15 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
     return (
       <>
         <div className="p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Equipo}</h1>
+          {/* Título actualizado al color exacto */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-[#FF4757]">{device.Equipo}</h1>
           <p className="text-center text-slate-400 text-lg mb-6">{searchTerm}</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-300">
             {/* --- RAM Card --- */}
-            <div className={`border rounded-lg p-4 transition-all text-center bg-slate-800/40 ${ramSupport ? 'border-green-500/50' : 'border-red-500/50'}`}>
+            <div className={`border rounded-lg p-4 transition-all text-center bg-slate-800/40 ${ramSupport ? 'border-green-500/50' : 'border-[#FF4757]/50'}`}>
               <h2 className="text-xl font-semibold mb-3">Memoria RAM</h2>
-              <div className={`flex items-center justify-center text-lg font-medium mb-3 ${ramSupport ? 'text-green-400' : 'text-red-500'}`}>
+              <div className={`flex items-center justify-center text-lg font-medium mb-3 ${ramSupport ? 'text-green-400' : 'text-[#FF4757]'}`}>
                 {ramSupport ? <CheckIcon /> : <XIcon />}
                 <span className="ml-2">{ramSupport ? 'Ampliable' : 'No Ampliable'}</span>
               </div>
@@ -66,9 +67,9 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
             </div>
 
             {/* --- Storage Card --- */}
-            <div className={`border rounded-lg p-4 transition-all text-center bg-slate-800/40 ${storageSupport ? 'border-green-500/50' : 'border-red-500/50'}`}>
+            <div className={`border rounded-lg p-4 transition-all text-center bg-slate-800/40 ${storageSupport ? 'border-green-500/50' : 'border-[#FF4757]/50'}`}>
               <h2 className="text-xl font-semibold mb-3">Almacenamiento</h2>
-              <div className={`flex items-center justify-center text-lg font-medium mb-3 ${storageSupport ? 'text-green-400' : 'text-red-500'}`}>
+              <div className={`flex items-center justify-center text-lg font-medium mb-3 ${storageSupport ? 'text-green-400' : 'text-[#FF4757]'}`}>
                 {storageSupport ? <CheckIcon /> : <XIcon />}
                 <span className="ml-2">{storageSupport ? 'Ampliable' : 'No Ampliable'}</span>
               </div>
@@ -86,7 +87,7 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
         <div className="px-6 pb-6 text-center">
             <button
                 onClick={() => setShowDetails(false)}
-                className="mt-4 px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-transform transform hover:scale-105"
+                className="mt-4 px-8 py-3 bg-[#FF4757] hover:bg-[#E03B4B] text-white font-bold rounded-lg transition-transform transform hover:scale-105 shadow-lg shadow-red-900/20"
             >
                 Ocultar detalles
             </button>
@@ -106,7 +107,8 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
   // --- Initial "SI/NO" View ---
   return (
     <div className="p-6 sm:p-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-red-500">{device.Equipo}</h1>
+        {/* Título actualizado al color exacto */}
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-[#FF4757]">{device.Equipo}</h1>
         <p className="text-center text-slate-400 text-lg mb-6">{searchTerm}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <StatusCard type="RAM" isSupported={ramSupport} />
@@ -115,7 +117,7 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
         <div className="text-center mt-8">
             <button
             onClick={() => setShowDetails(true)}
-            className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-transform transform hover:scale-105"
+            className="px-8 py-3 bg-[#FF4757] hover:bg-[#E03B4B] text-white font-bold rounded-lg transition-transform transform hover:scale-105 shadow-lg shadow-red-900/20"
             >
             Ver más detalles
             </button>
