@@ -17,7 +17,7 @@ export async function searchDevice(query: string): Promise<Device | null> {
     .select(
       'part_number,Familia,Equipo,art_fravega,art_on_city,art_cetrogar,Tipo_Dispositivo,Soporta_RAM,RAM_Max_GB,Modulos_RAM,ram_modulos_ocupados,Tipo_RAM,Soporta_Almacenamiento,Tipo_Almacenamiento,Almacenamiento_Maximo_Total,Notas'
     )
-    .or(`art_fravega.eq.${safeQuery},art_on_city.eq.${safeQuery},art_cetrogar.eq.${safeQuery}`)
+    .or(`art_fravega.ilike.${safeQuery},art_on_city.ilike.${safeQuery},art_cetrogar.ilike.${safeQuery},art_naldo.ilike.${safeQuery}`)
     .limit(1);
 
   if (error) {
