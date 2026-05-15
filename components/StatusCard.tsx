@@ -9,9 +9,17 @@ interface StatusCardProps {
 
 export default function StatusCard({ type, isSupported }: StatusCardProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg bg-slate-800/40 p-6 shadow-lg">
+    <div
+      className={`status-card flex flex-col items-center justify-center rounded-lg p-6 shadow-lg ${
+        isSupported
+          ? 'status-card-supported animate-pulse-glow'
+          : 'status-card-not-supported animate-pulse-glow-red'
+      }`}
+    >
       <h2 className="text-xl font-semibold text-slate-200 mb-4">{type}</h2>
-      {isSupported ? <CheckIcon /> : <XIcon />}
+      <div className={isSupported ? 'animate-icon-pulse' : 'animate-gentle-shake'}>
+        {isSupported ? <CheckIcon /> : <XIcon />}
+      </div>
       <p className={`mt-4 text-2xl font-bold ${isSupported ? 'text-green-400' : 'text-red-400'}`}>
         {isSupported ? 'SÍ' : 'NO'}
       </p>

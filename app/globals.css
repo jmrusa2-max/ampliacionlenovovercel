@@ -16,3 +16,183 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+  }
+}
+
+@keyframes pulseGlowRed {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(255, 71, 87, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+  }
+}
+
+@keyframes gentleShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-8px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* ===== ANIMATION UTILITY CLASSES ===== */
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.animate-fade-in-up-delay-1 {
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.animate-fade-in-up-delay-2 {
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out both;
+}
+
+.animate-scale-in-delay-1 {
+  animation: scaleIn 0.4s ease-out 0.15s both;
+}
+
+.animate-scale-in-delay-2 {
+  animation: scaleIn 0.4s ease-out 0.3s both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.4s ease-out both;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow-red {
+  animation: pulseGlowRed 2.5s ease-in-out infinite;
+}
+
+.animate-gentle-shake {
+  animation: gentleShake 0.5s ease-in-out 0.3s both;
+}
+
+.animate-icon-pulse {
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+.animate-toast {
+  animation: fadeInOut 3s ease-in-out both;
+}
+
+/* ===== SKELETON LOADER ===== */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ===== SEARCH BAR FOCUS GLOW ===== */
+
+.search-container {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.search-container:hover {
+  transform: translateY(-2px);
+}
+
+.search-container:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 71, 87, 0.4), 0 0 20px rgba(255, 71, 87, 0.15);
+}
+
+/* ===== STATUS CARD ENHANCEMENTS ===== */
+
+.status-card {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.status-card:hover {
+  transform: translateY(-3px);
+}
+
+.status-card-supported {
+  border-left: 4px solid rgba(74, 222, 128, 0.8);
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.08) 0%, rgba(30, 41, 59, 0.4) 100%);
+}
+
+.status-card-not-supported {
+  border-left: 4px solid rgba(255, 71, 87, 0.8);
+  background: linear-gradient(135deg, rgba(255, 71, 87, 0.08) 0%, rgba(30, 41, 59, 0.4) 100%);
+}
