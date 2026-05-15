@@ -49,17 +49,32 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
                 <span className="ml-2">{ramSupport ? 'Ampliable' : 'No Ampliable'}</span>
               </div>
               {ramSupport ? (
-                <div className="space-y-2 text-slate-400 text-center">
-                  <div className="flex items-center justify-center gap-1">
-                  <span><strong>Total de Módulos:</strong> {device.Modulos_RAM}</span>
-                  <Tooltip text="Incluye módulos soldados y removibles">
-                    <span className="text-xs text-gray-500">ℹ️</span>
-                  </Tooltip>
-                </div>
-                  <p><strong>Módulos Ocupados:</strong> {device.ram_modulos_ocupados}</p>
-                  <p><strong>Módulos Libres:</strong> {ramSlotsLibres}</p>
-                  <p><strong>RAM Máxima:</strong> {device.RAM_Max_GB} GB</p>
-                  <p><strong>Tipo:</strong> {device.Tipo_RAM}</p>
+                <div className="space-y-2 text-slate-300 mt-1">
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium flex items-center gap-1">
+                      Total de Módulos
+                      <Tooltip text="Incluye módulos soldados y removibles">
+                        <span className="text-xs text-gray-500 cursor-help">ℹ️</span>
+                      </Tooltip>
+                    </span>
+                    <span className="font-semibold text-white">{device.Modulos_RAM}</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium">Módulos Ocupados</span>
+                    <span className="font-semibold text-white">{device.ram_modulos_ocupados}</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium">Módulos Libres</span>
+                    <span className="font-semibold text-white">{ramSlotsLibres}</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium">RAM Máxima</span>
+                    <span className="font-semibold text-white">{device.RAM_Max_GB} GB</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium">Tipo</span>
+                    <span className="font-semibold text-white">{device.Tipo_RAM}</span>
+                  </div>
                 </div>
               ) : (
                 <p className="text-slate-400">La memoria RAM de este equipo no permite ser ampliada.</p>
@@ -74,9 +89,15 @@ export default function DeviceResultWrapper({ device, searchTerm }: DeviceResult
                 <span className="ml-2">{storageSupport ? 'Ampliable' : 'No Ampliable'}</span>
               </div>
               {storageSupport ? (
-                <div className="space-y-2 text-slate-400 text-center">
-                  <p><strong>Máximo Total:</strong> {device.Almacenamiento_Maximo_Total}</p>
-                  <p><strong>Tipo:</strong> {device.Tipo_Almacenamiento}</p>
+                <div className="space-y-2 text-slate-300 mt-1">
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium">Máximo Total</span>
+                    <span className="font-semibold text-white">{device.Almacenamiento_Maximo_Total}</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-slate-700/40 backdrop-blur-sm rounded-lg px-4 py-2.5 border border-slate-600/30 hover:border-slate-500/50 transition-colors">
+                    <span className="text-slate-400 text-sm font-medium">Tipo</span>
+                    <span className="font-semibold text-white">{device.Tipo_Almacenamiento}</span>
+                  </div>
                 </div>
               ) : (
                 <p className="text-slate-400">El almacenamiento de este equipo no puede ser ampliado.</p>
