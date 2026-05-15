@@ -22,7 +22,7 @@ export async function searchDevice(query: string): Promise<Device | null> {
 
   if (error) {
     console.error('[searchDevice] Error en Supabase:', error);
-    return null;
+    throw new Error(`Error al consultar la base de datos: ${error.message}`);
   }
 
   return data?.[0] ?? null;
