@@ -42,24 +42,24 @@ export default function RootLayout({
           />
         </div>
 
-        {/* ✅ Fondo: ELIMINADA LA BARRA NEGRA */}
+        {/* ✅ Fondo */}
         <div className="fixed inset-0 z-[-1] overflow-hidden"> 
           <Image
-            src="/disenov2.jpg" // Corregido a .png (como en Código A)
-            alt="Fondo abstracto"
+            src="/disenov2.jpg"
+            alt="Fondo Lenovo"
             fill
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "center" }}
             quality={90}
-            // ❌ ELIMINADA: La clase translate-y-[75px] causaba el espacio negro superior.
+            priority
           />
           
-          {/* Capas de Overlay y Viñeta */}
-          <div className="absolute inset-0 bg-black/60" />
+          {/* Capas de Overlay y Viñeta optimizadas para la foto */}
+          <div className="absolute inset-0 bg-slate-900/50" />
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse at center, transparent 40%, black 100%)",
+                "radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.8) 100%)",
             }}
           />
         </div>

@@ -1,0 +1,5 @@
+copia desde D:\datos legion blanca\presentaciones\2025\web-ampliacion\clone github
+
+esa es la v1 oficial en main publicada
+
+esta v2 incluye nuevas mejoras en dev al 15/5
