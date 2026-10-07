@@ -95,7 +95,97 @@
       border: 2px solid #27272a;
       border-radius: 50%;
     }
+
+    /* Driver.js Custom Theme - WhatsApp Dark & Lenovo Executive */
+    .driver-popover.lenovo-tour-theme {
+      background-color: #182229 !important;
+      color: #e9edef !important;
+      border: 1px solid #2a3942 !important;
+      border-radius: 16px !important;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+      padding: 18px 20px !important;
+      max-width: 360px !important;
+      font-family: inherit !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-title {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+      margin-bottom: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-description {
+      font-size: 13px !important;
+      line-height: 1.55 !important;
+      color: #94a3b8 !important;
+      margin-bottom: 16px !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-footer {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      margin-top: 14px !important;
+      padding-top: 10px !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-progress-text {
+      font-size: 11px !important;
+      color: #64748b !important;
+      font-weight: 600 !important;
+    }
+    .driver-popover.lenovo-tour-theme button {
+      border-radius: 8px !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      padding: 7px 15px !important;
+      transition: all 0.2s ease !important;
+      cursor: pointer !important;
+      text-shadow: none !important;
+      border: none !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-next-btn {
+      background-color: #00a884 !important;
+      color: #ffffff !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-next-btn:hover {
+      background-color: #029172 !important;
+      transform: translateY(-1px);
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-prev-btn {
+      background-color: #202c33 !important;
+      color: #94a3b8 !important;
+      border: 1px solid #2a3942 !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-prev-btn:hover {
+      background-color: #2a3942 !important;
+      color: #ffffff !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-close-btn {
+      color: #64748b !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-close-btn:hover {
+      color: #ffffff !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-arrow-side-left.driver-popover-arrow {
+      border-right-color: #182229 !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-arrow-side-right.driver-popover-arrow {
+      border-left-color: #182229 !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-arrow-side-top.driver-popover-arrow {
+      border-bottom-color: #182229 !important;
+    }
+    .driver-popover.lenovo-tour-theme .driver-popover-arrow-side-bottom.driver-popover-arrow {
+      border-top-color: #182229 !important;
+    }
   </style>
+
+  <!-- Driver.js v1.3.1 CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
 </head>
 <body class="h-full bg-slate-950 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
 
@@ -109,6 +199,11 @@
     </div>
     
     <div class="flex items-center gap-2">
+      <!-- Showcase Tour Button (Driver.js) -->
+      <button id="startTourBtn" onclick="lanzarTourConReintentos(true)" class="flex items-center gap-1.5 px-3 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition-all border border-emerald-500/50 shadow-sm" title="Iniciar Tour Demostrativo Ejecutivo">
+        <span>🚀 Tour Demo</span>
+      </button>
+
       <!-- Toggle Sound -->
       <button id="toggleSoundBtn" class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700" title="Activar/Silenciar efectos">
         <svg id="soundOnIcon" class="w-3.5 h-3.5 text-wa-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,7 +256,7 @@
       </div>
 
       <!-- WhatsApp Header -->
-      <div class="bg-wa-header px-3.5 py-2.5 flex items-center justify-between border-b border-wa-border z-20 shrink-0">
+      <div id="botHeader" class="bg-wa-header px-3.5 py-2.5 flex items-center justify-between border-b border-wa-border z-20 shrink-0">
         <div class="flex items-center gap-2.5">
           <button class="text-wa-textSecondary hover:text-wa-textPrimary transition-colors sm:hidden">
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -221,7 +316,7 @@
         </div>
 
         <!-- Initial Welcome Message -->
-        <div class="self-start max-w-[90%] w-full sm:w-auto">
+        <div id="initialWelcomeBubble" class="self-start max-w-[90%] w-full sm:w-auto">
           <div class="bg-wa-botBubble text-wa-textPrimary rounded-t-xl rounded-tr-xl p-3.5 shadow-md border border-[#2a3942]/50 relative">
             <div class="text-[13px] leading-relaxed">
               👋 <strong>¡Hola! Asistente Lenovo Retail</strong><br><br>
@@ -233,7 +328,7 @@
             </div>
           </div>
           <!-- Native Quick Reply Buttons (3 opciones de inicio) -->
-          <div class="bg-wa-buttonBg rounded-b-xl border-x border-b border-[#2a3942]/50 shadow-md divide-y divide-[#2a3942]/70 overflow-hidden">
+          <div id="initialQuickReplies" class="bg-wa-buttonBg rounded-b-xl border-x border-b border-[#2a3942]/50 shadow-md divide-y divide-[#2a3942]/70 overflow-hidden">
             <button onclick="handleQuickReplyClick(this, 'ESCRIBIR_SKU', 'Menú Principal')" class="w-full py-2.5 px-3 hover:bg-[#233138] active:bg-[#182229] transition-all flex items-center justify-center gap-2 group text-center">
               <span class="text-wa-green text-sm font-bold transition-transform group-hover:-translate-x-0.5">↩</span>
               <span class="text-wa-green font-medium text-[13px]">🔍 Escribí el artículo/SKU</span>
@@ -262,7 +357,7 @@
       </div>
 
       <!-- Quick Action Retail Chips (On top of input) -->
-      <div class="bg-[#111b21] border-t border-wa-border/80 px-3 py-2 z-20 shrink-0">
+      <div id="quickChipsBar" class="bg-[#111b21] border-t border-wa-border/80 px-3 py-2 z-20 shrink-0">
         <div class="flex items-center justify-between mb-1.5">
           <span class="text-[11px] font-semibold tracking-wider uppercase text-slate-400 flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-wa-green"></span>
@@ -271,6 +366,11 @@
           <span class="text-[10px] text-slate-500">1-toque</span>
         </div>
         <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-1">
+          <!-- Tour Chip inside phone -->
+          <button id="tourChip" onclick="lanzarTourConReintentos(true)" class="shrink-0 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/50 text-emerald-300 text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm font-semibold">
+            <span>🚀 Tour Demo</span>
+          </button>
+
           <button onclick="triggerSearch('CM4777')" class="shrink-0 bg-wa-chips hover:bg-wa-chipsHover active:scale-95 text-wa-textPrimary border border-wa-border text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm">
             <span class="w-2 h-2 rounded-full bg-blue-400"></span>
             <span>Probar CM4777</span>
@@ -296,7 +396,7 @@
       </div>
 
       <!-- Bottom WhatsApp Input Bar -->
-      <footer class="bg-wa-header px-3 py-2 flex items-center gap-2 border-t border-wa-border z-20 shrink-0">
+      <footer id="chatFooter" class="bg-wa-header px-3 py-2 flex items-center gap-2 border-t border-wa-border z-20 shrink-0">
         <button class="text-wa-textSecondary hover:text-wa-textPrimary transition-colors p-1" title="Emojis">
           <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -904,6 +1004,11 @@
 
         const wrapper = document.createElement('div');
         wrapper.className = 'flex flex-col items-start';
+        if (rawText.includes('FICHA TÉCNICA OFICIAL') || rawText.includes('IdeaPad Slim 3 15IRH10')) {
+          wrapper.id = 'tourFichaCard';
+        } else if (rawText.includes('Opciones de Ampliación') || rawText.includes('Cómo ampliar')) {
+          wrapper.id = 'tourUpsellCard';
+        }
         wrapper.innerHTML = botBubbleHTML;
         messagesHook.appendChild(wrapper);
 
@@ -1057,8 +1162,171 @@
       typingIndicator.classList.remove('flex');
       botStatusText.innerText = 'en línea';
       botStatusText.className = 'text-xs text-wa-green';
+
+      // Restaurar botones de inicio
+      const initBtns = document.querySelectorAll('#initialQuickReplies button');
+      initBtns.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      });
+
       scrollToBottom();
     });
+
+    // ==========================================
+    // SISTEMA DE SHOWCASE TOUR GUIADO (Driver.js v1.3.1)
+    // Modo Demo Ejecutivo - Navegación Manual (Sin auto-tour)
+    // ==========================================
+    let driverObj = null;
+
+    function lanzarTourConReintentos(forzar = true, intentos = 0) {
+      if (typeof window.driver !== 'undefined' && window.driver.js) {
+        iniciarShowcaseTour(forzar);
+      } else if (intentos < 25) {
+        setTimeout(() => lanzarTourConReintentos(forzar, intentos + 1), 200);
+      } else {
+        console.warn('Driver.js no se cargó a tiempo desde CDN.');
+      }
+    }
+
+    function iniciarShowcaseTour(forzar = true) {
+      if (typeof window.driver === 'undefined' || !window.driver.js) {
+        console.error('Driver.js no está inicializado.');
+        return;
+      }
+
+      if (driverObj && typeof driverObj.destroy === 'function') {
+        try { driverObj.destroy(); } catch (e) {}
+      }
+
+      // Si forzar es true o ya hay muchos mensajes, reiniciamos el chat para una experiencia impecable
+      if (forzar && messagesHook.children.length > 0) {
+        document.getElementById('resetDemoBtn').click();
+      }
+
+      const driver = window.driver.js.driver;
+
+      driverObj = driver({
+        showProgress: true,
+        progressText: 'Paso {{current}} de {{total}}',
+        nextBtnText: 'Siguiente →',
+        prevBtnText: '← Anterior',
+        doneBtnText: 'Finalizar Tour ✓',
+        popoverClass: 'driver-popover lenovo-tour-theme',
+        stageRadius: 12,
+        stagePadding: 8,
+        allowClose: true,
+        overlayColor: 'rgba(0, 0, 0, 0.78)',
+        steps: [
+          {
+            element: '#botHeader',
+            popover: {
+              title: '🛡️ Cuenta Oficial Verificada',
+              description: 'Canal oficial de Lenovo Retail Argentina para vendedores de Frávega, On City, Cetrogar y Naldo. Acceso inmediato sin árboles de menú confusos ni descargas adicionales.',
+              side: 'bottom',
+              align: 'start'
+            }
+          },
+          {
+            element: '#initialWelcomeBubble',
+            popover: {
+              title: '⚡ Menú con 3 Opciones Nativas',
+              description: 'Inicio claro y directo con botones nativos de WhatsApp Business: Búsqueda rápida por SKU, Comparativa entre modelos, o Pregunta en lenguaje natural.',
+              side: 'bottom',
+              align: 'start',
+              onNextClick: () => {
+                let fichaEl = document.getElementById('tourFichaCard');
+                if (!fichaEl) {
+                  processHybridQuery('CM4777');
+                  setTimeout(() => {
+                    const card = document.getElementById('tourFichaCard');
+                    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    driverObj.moveNext();
+                  }, 950);
+                } else {
+                  driverObj.moveNext();
+                }
+              }
+            }
+          },
+          {
+            element: '#tourFichaCard',
+            popover: {
+              title: '📋 Ficha Técnica y Verificación PSREF',
+              description: 'Match exacto entre el código de retail (CM4777) y la ingeniería oficial de Lenovo (MTM 83ER009HAR). Muestra procesador, RAM instalada, slots disponibles y pantalla en 1 segundo.',
+              side: 'top',
+              align: 'center',
+              onPrevClick: () => {
+                driverObj.movePrevious();
+              },
+              onNextClick: () => {
+                let upsellEl = document.getElementById('tourUpsellCard');
+                if (!upsellEl) {
+                  const buttons = document.querySelectorAll('#tourFichaCard button');
+                  let ampliarBtn = null;
+                  buttons.forEach(b => {
+                    if (b.innerText.includes('ampliar')) ampliarBtn = b;
+                  });
+                  if (ampliarBtn) {
+                    handleQuickReplyClick(ampliarBtn, 'COMO_AMPLIAR', 'IdeaPad Slim 3 15IRH10');
+                  } else {
+                    deliverBotReply((dev) => buildUpgradeExplanation(dev), [
+                      { text: '🎯 ¿Para qué sirve?', action: 'PARA_QUE_SIRVE' },
+                      { text: '🔍 Consultar otro SKU', action: 'OTRO_SKU' }
+                    ]);
+                  }
+                  setTimeout(() => {
+                    const card = document.getElementById('tourUpsellCard');
+                    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    driverObj.moveNext();
+                  }, 950);
+                } else {
+                  driverObj.moveNext();
+                }
+              }
+            }
+          },
+          {
+            element: '#tourUpsellCard',
+            popover: {
+              title: '💰 Upselling: Aumento de Ticket Promedio',
+              description: 'Le indica al vendedor exactamente cómo llevar el equipo de 8GB a 24GB (reemplazando el módulo por 16GB SODIMM DDR5) y ampliar disco a 2TB NVMe. Cierra la venta y aumenta el margen del retail.',
+              side: 'top',
+              align: 'center',
+              onPrevClick: () => {
+                driverObj.movePrevious();
+              }
+            }
+          },
+          {
+            element: '#quickChipsBar',
+            popover: {
+              title: '⚡ Accesos Rápidos de Góndola',
+              description: 'Atajos para situaciones frecuentes en salón: comparar modelos cara a cara (ej: CM4777 vs 364549), evaluar equipos gamer (LOQ RTX 3050) o validar si corre AutoCAD.',
+              side: 'top',
+              align: 'center',
+              onPrevClick: () => {
+                driverObj.movePrevious();
+              }
+            }
+          },
+          {
+            element: '#chatFooter',
+            popover: {
+              title: '🧠 Motor de IA en Lenguaje Natural',
+              description: 'El vendedor o supervisor puede escribir cualquier duda técnica del cliente (ej: "¿Sirve para arquitectura?", "¿Corre Warzone?"). El bot responde con tips comerciales y lenguaje claro.',
+              side: 'top',
+              align: 'center',
+              onPrevClick: () => {
+                driverObj.movePrevious();
+              }
+            }
+          }
+        ]
+      });
+
+      driverObj.drive();
+    }
 
     // Toggle View (Phone vs Fullscreen)
     const deviceFrame = document.getElementById('deviceFrame');
