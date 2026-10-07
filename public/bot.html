@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lenovo Retail Argentina | Asistente Híbrido WhatsApp</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            wa: {
+              bg: '#0b141a',
+              header: '#202c33',
+              input: '#202c33',
+              botBubble: '#202c33',
+              userBubble: '#005c4b',
+              userBubbleHover: '#026d59',
+              green: '#00a884',
+              greenLight: '#25d366',
+              teal: '#53bdeb',
+              textPrimary: '#e9edef',
+              textSecondary: '#8696a0',
+              border: '#2a3942',
+              buttonBg: '#202c33',
+              buttonHover: '#233138',
+              chips: '#182229',
+              chipsHover: '#222e35'
+            },
+            lenovo: {
+              red: '#e2231a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* WhatsApp Dark Mode Wallpaper */
+    .wa-wallpaper {
+      background-color: #0b141a;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0);
+      background-size: 24px 24px;
+      position: relative;
+    }
+
+    .wa-wallpaper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.055;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 15c-24.8 0-45 20.2-45 45 0 8 2.1 15.5 5.8 22L15 105l23.5-5.6c6.2 3.4 13.4 5.6 21.5 5.6 24.8 0 45-20.2 45-45s-20.2-45-45-45zm0 82c-7.2 0-13.9-2.1-19.5-5.7l-1.4-.9-14.4 3.4 3.5-13.9-.9-1.5C23.4 72.8 21.2 66.6 21.2 60c0-21.4 17.4-38.8 38.8-38.8 21.4 0 38.8 17.4 38.8 38.8S81.4 97 60 97z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background-size: 140px;
+    }
+
+    /* Custom Scrollbar */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Bouncing Typing Animation */
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-5px); opacity: 1; }
+    }
+    .dot-1 { animation: typingBounce 1.2s infinite ease-in-out 0s; }
+    .dot-2 { animation: typingBounce 1.2s infinite ease-in-out 0.2s; }
+    .dot-3 { animation: typingBounce 1.2s infinite ease-in-out 0.4s; }
+
+    /* Smartphone Frame Details */
+    .phone-speaker {
+      width: 60px;
+      height: 4px;
+      background: #27272a;
+      border-radius: 4px;
+    }
+    .phone-camera {
+      width: 10px;
+      height: 10px;
+      background: #09090b;
+      border: 2px solid #27272a;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body class="h-full bg-slate-950 text-slate-100 flex flex-col font-sans select-none overflow-hidden">
+
+  <!-- Executive Top Bar -->
+  <header class="bg-slate-900 border-b border-slate-800 px-4 py-2 flex items-center justify-between text-xs z-50 shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center bg-lenovo-red px-2.5 py-1 rounded font-bold text-white tracking-widest text-xs uppercase shadow-sm">
+        Lenovo
+      </div>
+      <span class="text-slate-300 font-medium hidden sm:inline">Simulador Oficial WhatsApp • Arquitectura Híbrida (Ficha + Quick Replies + Motor IA)</span>
+    </div>
+    
+    <div class="flex items-center gap-2">
+      <!-- Toggle Sound -->
+      <button id="toggleSoundBtn" class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700" title="Activar/Silenciar efectos">
+        <svg id="soundOnIcon" class="w-3.5 h-3.5 text-wa-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        </svg>
+        <svg id="soundOffIcon" class="w-3.5 h-3.5 text-slate-500 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+        </svg>
+        <span class="text-xs">Audio</span>
+      </button>
+
+      <!-- Toggle View: Phone vs Fullscreen -->
+      <button id="toggleViewBtn" class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors border border-slate-700">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+        </svg>
+        <span id="viewModeText" class="text-xs">Pantalla Completa</span>
+      </button>
+
+      <!-- Reset Demo -->
+      <button id="resetDemoBtn" class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-red-950/60 hover:bg-red-900/80 text-red-200 border border-red-800/60 transition-colors" title="Reiniciar demostración limpia">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <span>Reiniciar</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Viewport -->
+  <main id="mainContainer" class="flex-1 flex items-center justify-center p-0 sm:p-4 bg-gradient-to-b from-slate-950 via-slate-900 to-black overflow-hidden relative">
+
+    <!-- Smartphone Frame -->
+    <div id="deviceFrame" class="w-full max-w-[460px] h-full sm:h-[860px] max-h-full sm:max-h-[96vh] bg-[#121b22] sm:rounded-[42px] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_0_12px_#1e293b,0_0_0_14px_#334155] flex flex-col overflow-hidden relative transition-all duration-300">
+      
+      <!-- Phone Top Notch Bar -->
+      <div id="phoneTopBar" class="hidden sm:flex items-center justify-between px-7 pt-2.5 pb-1 bg-[#1a2329] shrink-0 border-b border-[#222e35]">
+        <span class="text-[11px] font-semibold text-slate-300" id="liveClock">12:30</span>
+        <div class="flex items-center gap-2">
+          <div class="phone-speaker"></div>
+          <div class="phone-camera"></div>
+        </div>
+        <div class="flex items-center gap-1.5 text-slate-300">
+          <span class="text-[10px] font-bold">5G</span>
+          <div class="w-5 h-2.5 border border-slate-300 rounded-sm p-0.5 flex items-center">
+            <div class="w-full h-full bg-slate-300 rounded-2xs"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WhatsApp Header -->
+      <div class="bg-wa-header px-3.5 py-2.5 flex items-center justify-between border-b border-wa-border z-20 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <button class="text-wa-textSecondary hover:text-wa-textPrimary transition-colors sm:hidden">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+          </button>
+
+          <!-- Lenovo Avatar -->
+          <div class="relative cursor-pointer">
+            <div class="w-10 h-10 rounded-full bg-lenovo-red flex items-center justify-center font-black text-white text-[10px] tracking-tight shadow-md border border-white/20 select-none">
+              LENOVO
+            </div>
+            <span class="absolute bottom-0 right-0 w-3 h-3 bg-wa-green border-2 border-wa-header rounded-full"></span>
+          </div>
+
+          <!-- Contact Name & Verified Badge -->
+          <div class="flex flex-col cursor-pointer">
+            <div class="flex items-center gap-1.5">
+              <span class="font-semibold text-wa-textPrimary text-sm tracking-wide">Lenovo Retail Argentina</span>
+              <!-- Official Green Verified Badge -->
+              <svg class="w-4 h-4 text-wa-green shrink-0 inline-block" viewBox="0 0 24 24" fill="currentColor" title="Cuenta comercial oficial verificada">
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.8l-4.2-4.2 1.4-1.4 2.8 2.8 6.4-6.4 1.4 1.4-7.8 7.8z"/>
+              </svg>
+            </div>
+            <span id="botStatusText" class="text-xs text-wa-green transition-all duration-200">en línea</span>
+          </div>
+        </div>
+
+        <!-- Action Icons -->
+        <div class="flex items-center gap-3 text-wa-textSecondary">
+          <button class="hover:text-wa-textPrimary transition-colors p-1" title="Videollamada">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </button>
+          <button class="hover:text-wa-textPrimary transition-colors p-1" title="Llamada">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </button>
+          <button class="hover:text-wa-textPrimary transition-colors p-1" title="Menú">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Messages Scroll Area -->
+      <div id="chatMessages" class="flex-1 wa-wallpaper overflow-y-auto custom-scrollbar p-3.5 space-y-3.5 z-10 flex flex-col">
+        <!-- End-to-end Encryption Banner -->
+        <div class="self-center bg-[#182229] border border-[#2a3942]/60 text-[#ffd279] text-[11px] px-3.5 py-1.5 rounded-lg max-w-[90%] text-center shadow-sm select-none my-1 flex items-center justify-center gap-1.5">
+          <svg class="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+          </svg>
+          <span>Los mensajes y las llamadas están cifrados de extremo a extremo. Nadie fuera de este chat puede leerlos.</span>
+        </div>
+
+        <!-- Initial Welcome Message -->
+        <div class="self-start max-w-[90%] w-full sm:w-auto">
+          <div class="bg-wa-botBubble text-wa-textPrimary rounded-t-xl rounded-tr-xl p-3.5 shadow-md border border-[#2a3942]/50 relative">
+            <div class="text-[13px] leading-relaxed">
+              👋 <strong>¡Hola! Asistente Lenovo Retail</strong><br><br>
+              Tu copiloto técnico para cerrar ventas en góndola (Frávega, On City, Cetrogar, Naldo).<br><br>
+              👉 <strong>¿Qué querés hacer? Elegí una opción:</strong>
+            </div>
+            <div class="text-[10px] text-wa-textSecondary text-right mt-1.5 flex items-center justify-end gap-1">
+              <span id="initialMsgTime">12:30</span>
+            </div>
+          </div>
+          <!-- Native Quick Reply Buttons (3 opciones de inicio) -->
+          <div class="bg-wa-buttonBg rounded-b-xl border-x border-b border-[#2a3942]/50 shadow-md divide-y divide-[#2a3942]/70 overflow-hidden">
+            <button onclick="handleQuickReplyClick(this, 'ESCRIBIR_SKU', 'Menú Principal')" class="w-full py-2.5 px-3 hover:bg-[#233138] active:bg-[#182229] transition-all flex items-center justify-center gap-2 group text-center">
+              <span class="text-wa-green text-sm font-bold transition-transform group-hover:-translate-x-0.5">↩</span>
+              <span class="text-wa-green font-medium text-[13px]">🔍 Escribí el artículo/SKU</span>
+            </button>
+            <button onclick="handleQuickReplyClick(this, 'COMPARATIVA_SKU', 'Menú Principal')" class="w-full py-2.5 px-3 hover:bg-[#233138] active:bg-[#182229] transition-all flex items-center justify-center gap-2 group text-center">
+              <span class="text-wa-green text-sm font-bold transition-transform group-hover:-translate-x-0.5">↩</span>
+              <span class="text-wa-green font-medium text-[13px]">⚖️ Comparativa de artículo/SKU</span>
+            </button>
+            <button onclick="handleQuickReplyClick(this, 'ESCRIBIR_PREGUNTA', 'Menú Principal')" class="w-full py-2.5 px-3 hover:bg-[#233138] active:bg-[#182229] transition-all flex items-center justify-center gap-2 group text-center">
+              <span class="text-wa-green text-sm font-bold transition-transform group-hover:-translate-x-0.5">↩</span>
+              <span class="text-wa-green font-medium text-[13px]">💬 Escribir pregunta</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Messages Anchor -->
+        <div id="messagesHook" class="space-y-3.5"></div>
+
+        <!-- Typing Indicator Bubble -->
+        <div id="typingIndicator" class="self-start bg-wa-botBubble text-wa-textPrimary rounded-xl rounded-tl-none px-4 py-2.5 shadow-md border border-[#2a3942]/40 hidden items-center gap-1.5">
+          <div class="w-2 h-2 rounded-full bg-wa-textSecondary dot-1"></div>
+          <div class="w-2 h-2 rounded-full bg-wa-textSecondary dot-2"></div>
+          <div class="w-2 h-2 rounded-full bg-wa-textSecondary dot-3"></div>
+          <span class="text-xs text-wa-textSecondary ml-1.5 font-normal">escribiendo respuesta...</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Retail Chips (On top of input) -->
+      <div class="bg-[#111b21] border-t border-wa-border/80 px-3 py-2 z-20 shrink-0">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-semibold tracking-wider uppercase text-slate-400 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-wa-green"></span>
+            Accesos Rápidos de Demostración:
+          </span>
+          <span class="text-[10px] text-slate-500">1-toque</span>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-1">
+          <button onclick="triggerSearch('CM4777')" class="shrink-0 bg-wa-chips hover:bg-wa-chipsHover active:scale-95 text-wa-textPrimary border border-wa-border text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+            <span>Probar CM4777</span>
+          </button>
+
+          <button onclick="triggerSearch('83GS003PAR')" class="shrink-0 bg-wa-chips hover:bg-wa-chipsHover active:scale-95 text-wa-textPrimary border border-wa-border text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Probar LOQ (Gamer)</span>
+          </button>
+
+          <button onclick="triggerSearch('¿Sirve para AutoCAD?')" class="shrink-0 bg-wa-chips hover:bg-wa-chipsHover active:scale-95 text-wa-textPrimary border border-wa-border text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm">
+            <span>📐 ¿Sirve para AutoCAD?</span>
+          </button>
+
+          <button onclick="triggerSearch('CM4777 vs 364549')" class="shrink-0 bg-wa-chips hover:bg-wa-chipsHover active:scale-95 text-wa-textPrimary border border-wa-border text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm">
+            <span>⚖️ CM4777 vs 364549</span>
+          </button>
+
+          <button onclick="triggerSearch('Hola')" class="shrink-0 bg-wa-chips hover:bg-wa-chipsHover active:scale-95 text-wa-textPrimary border border-wa-border text-xs px-2.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-sm">
+            <span>👋 Hola / Ayuda</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom WhatsApp Input Bar -->
+      <footer class="bg-wa-header px-3 py-2 flex items-center gap-2 border-t border-wa-border z-20 shrink-0">
+        <button class="text-wa-textSecondary hover:text-wa-textPrimary transition-colors p-1" title="Emojis">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </button>
+
+        <button class="text-wa-textSecondary hover:text-wa-textPrimary transition-colors p-1" title="Adjuntar archivo">
+          <svg class="w-5 h-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+          </svg>
+        </button>
+
+        <form id="chatForm" class="flex-1 flex items-center" onsubmit="event.preventDefault(); handleUserSubmit();">
+          <input 
+            id="messageInput" 
+            type="text" 
+            placeholder="Consultá un SKU o preguntá (ej: ¿sirve para autocad?)..." 
+            class="w-full bg-[#2a3942] text-wa-textPrimary text-sm rounded-lg px-3.5 py-2.5 placeholder-wa-textSecondary focus:outline-none focus:ring-1 focus:ring-wa-green transition-all"
+            autocomplete="off"
+          />
+        </form>
+
+        <button id="actionBtn" onclick="handleUserSubmit()" class="w-10 h-10 rounded-full bg-wa-green hover:bg-[#029172] text-white flex items-center justify-center transition-transform active:scale-95 shadow-md shrink-0">
+          <svg class="w-5 h-5 translate-x-0.5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- Web Audio API Synthesizer -->
+  <script>
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playMessageSentSound() {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(580, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.09);
+      } catch (e) {}
+    }
+
+    function playMessageReceivedSound() {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(660, audioCtx.currentTime + 0.14);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.15);
+      } catch (e) {}
+    }
+
+    document.getElementById('toggleSoundBtn').addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundOnIcon').classList.toggle('hidden', !soundEnabled);
+      document.getElementById('soundOffIcon').classList.toggle('hidden', soundEnabled);
+    });
+  </script>
+
+  <!-- Mock Database & Hybrid Conversation Engine -->
+  <script>
+    const MOCK_DATABASE = [
+      {
+        art_fravega: 'CM4777',
+        art_on_city: 'CM4777',
+        art_cetrogar: '4777-SLIM3',
+        art_naldo: 'NL-83K1004',
+        part_number: '83K1004QAR',
+        nombre: 'IdeaPad Slim 3 15IRH10',
+        tipo: 'Notebook',
+        cpu: 'Intel Core i5-13420H (8 núcleos / 12 hilos, hasta 4.6 GHz)',
+        gpu: 'Intel UHD Graphics integrada',
+        tiene_dedicada: false,
+        ram_instalada: '8 GB DDR5',
+        ram_ampliable: true,
+        ram_total_modulos: 2,
+        ram_ocupados: 2,
+        ram_libres: 0,
+        ram_max: 24,
+        ram_tipo: 'DDR5',
+        storage_instalado: 'SSD 512 GB NVMe M.2',
+        storage_ampliable: true,
+        storage_max: '2 TB',
+        storage_tipo: 'NVMe M.2',
+        pantalla: '15.6" FHD (1920x1080) IPS 300nits Antirreflejo',
+        teclado_numerico: true,
+        peso: '1.62 kg',
+        ampliacion_detalle: {
+          ram: 'Cuenta con 2 slots ocupados (8GB soldados + 1 módulo removible). Para llevarla al máximo de *24GB*, se reemplaza el módulo removible existente por *1 módulo de 16GB SODIMM DDR5 4800/5200MHz*.',
+          disco: 'Dispone de ranura M.2 2280 PCIe 4.0; podés reemplazar el SSD original por uno de hasta *2TB NVMe M.2*.',
+          argumento_venta: 'El cliente puede llevarse este equipo hoy y duplicar su rendimiento en memoria RAM agregando el módulo por una fracción del costo de un equipo de gama superior.'
+        },
+        perfil_uso: {
+          ideal: 'Estudio universitario, trabajo administrativo pesado, multitarea ágil y programación.',
+          limitado: 'Diseño gráfico 2D casual en Photoshop, Illustrator o Canva.',
+          no_recomendado: 'Renders 3D pesados ni gaming exigente; para ese perfil técnico recomendar línea LOQ o Legion con placa NVIDIA RTX.'
+        }
+      },
+      {
+        art_fravega: '364549',
+        art_on_city: '364549',
+        art_cetrogar: 'AIO3-364549',
+        art_naldo: 'NL-364549',
+        part_number: 'F0GH00XXAR',
+        nombre: 'IdeaCentre AIO 3 24IAP7',
+        tipo: 'All-In-One (Escritorio)',
+        cpu: 'Intel Core i3-1215U (6 núcleos / 8 hilos, hasta 4.4 GHz)',
+        gpu: 'Intel UHD Graphics integrada',
+        tiene_dedicada: false,
+        ram_instalada: '8 GB DDR4',
+        ram_ampliable: true,
+        ram_total_modulos: 2,
+        ram_ocupados: 2,
+        ram_libres: 0,
+        ram_max: 16,
+        ram_tipo: 'DDR4',
+        storage_instalado: 'SSD 256 GB NVMe M.2',
+        storage_ampliable: true,
+        storage_max: '2 TB (1x 2.5" HDD + 1x M.2 SSD)',
+        storage_tipo: 'NVMe M.2 / SATA',
+        pantalla: '23.8" FHD (1920x1080) IPS 250nits sin bordes',
+        teclado_numerico: true,
+        peso: 'Equipo de sobremesa con soporte integrado y periféricos inalámbricos',
+        ampliacion_detalle: {
+          ram: 'Posee 2 ranuras SO-DIMM DDR4. Soporta hasta *16GB* instalando 2 módulos de 8GB SODIMM DDR4 3200MHz.',
+          disco: 'Posee bahía dual: soporta agregar 1 disco de 2.5" SATA (HDD o SSD) de hasta 1TB más el SSD M.2 original, sumando hasta *2TB de almacenamiento total*.',
+          argumento_venta: 'Solución integral que despeja el escritorio sin cables y permite sumar un disco mecánico económico para respaldo masivo de archivos del comercio o la familia.'
+        },
+        perfil_uso: {
+          ideal: 'Comercio, punto de venta, oficina de atención al público, estudio escolar y streaming hogareño.',
+          limitado: 'Edición fotográfica moderada y multitarea estándar de oficina.',
+          no_recomendado: 'Movilidad (es de sobremesa) ni gaming 3D o diseño arquitectónico pesado.'
+        }
+      },
+      {
+        art_fravega: '364120',
+        art_on_city: '364120',
+        art_cetrogar: 'IP1-82VG',
+        art_naldo: 'NL-82VG00',
+        part_number: '82VG0007AR',
+        nombre: 'IdeaPad 1 15AMN7',
+        tipo: 'Notebook',
+        cpu: 'AMD Ryzen 3 7320U (4 núcleos / 8 hilos, hasta 4.1 GHz)',
+        gpu: 'AMD Radeon 610M integrada',
+        tiene_dedicada: false,
+        ram_instalada: '8 GB LPDDR5',
+        ram_ampliable: false,
+        ram_total_modulos: 0,
+        ram_ocupados: 0,
+        ram_libres: 0,
+        ram_max: 8,
+        ram_tipo: 'LPDDR5 Soldada',
+        storage_instalado: 'SSD 256 GB NVMe M.2',
+        storage_ampliable: true,
+        storage_max: '1 TB',
+        storage_tipo: 'NVMe M.2',
+        pantalla: '15.6" FHD (1920x1080) TN 220nits Antirreflejo',
+        teclado_numerico: true,
+        peso: '1.58 kg',
+        ampliacion_detalle: {
+          ram: 'Memoria RAM 100% soldada en placa madre (LPDDR5). *No ampliable.*',
+          disco: 'La unidad SSD M.2 2242 existente puede reemplazarse por una unidad de hasta *1TB NVMe M.2*.',
+          argumento_venta: 'Equipo ideal para presupuestos justos; el almacenamiento se puede cuadruplicar a futuro con un SSD M.2 sin gastar de más hoy.'
+        },
+        perfil_uso: {
+          ideal: 'Estudio secundario/terciario, paquete Office, navegación web, YouTube/Netflix y tareas cotidianas.',
+          limitado: 'Juegos livianos (LoL, Roblox) en ajustes bajos.',
+          no_recomendado: 'Ampliación física de RAM ni diseño/gaming profesional.'
+        }
+      },
+      {
+        art_fravega: '364912',
+        art_on_city: '364912',
+        art_cetrogar: 'LOQ-15IAX',
+        art_naldo: 'NL-LOQ3050',
+        part_number: '83GS003PAR',
+        nombre: 'Lenovo LOQ 15IAX9',
+        tipo: 'Notebook Gamer',
+        cpu: 'Intel Core i5-12450HX (8 núcleos / 12 hilos, hasta 4.4 GHz)',
+        gpu: 'NVIDIA GeForce RTX 3050 6GB GDDR6 (Dedicada, TGP 95W con Ray Tracing & DLSS)',
+        tiene_dedicada: true,
+        ram_instalada: '16 GB DDR5',
+        ram_ampliable: true,
+        ram_total_modulos: 2,
+        ram_ocupados: 2,
+        ram_libres: 0,
+        ram_max: 32,
+        ram_tipo: 'DDR5',
+        storage_instalado: 'SSD 512 GB PCIe 4.0 NVMe',
+        storage_ampliable: true,
+        storage_max: '2 TB (2x ranuras M.2 libres/adicionales)',
+        storage_tipo: 'NVMe M.2',
+        pantalla: '15.6" FHD (1920x1080) IPS 144Hz 300nits 100% sRGB G-SYNC',
+        teclado_numerico: true,
+        peso: '2.38 kg con chasis térmico dual',
+        ampliacion_detalle: {
+          ram: 'Dispone de 2 ranuras SO-DIMM DDR5 modulares. Soporta hasta *32GB DDR5 4800MHz* instalando 2 módulos de 16GB.',
+          disco: 'Viene con *segunda ranura M.2 2280 PCIe 4.0 libre*. Podés colocar un segundo SSD de 1TB o 2TB sin necesidad de clonar ni tocar el disco original.',
+          argumento_venta: 'Potencia garantizada para gaming pesado y arquitectura profesional, con bahía M.2 libre para expandir almacenamiento en 2 minutos sin formatear.'
+        },
+        perfil_uso: {
+          ideal: 'Gaming exigente (Warzone, Cyberpunk, GTA V), renders en Revit/Lumion, AutoCAD 3D y edición de video 4K en Premiere.',
+          limitado: 'Ninguno en retail convencional; es la máxima potencia gráfica de catálogo.',
+          no_recomendado: 'Usuarios que busquen una laptop ultra liviana de menos de 1.5kg.'
+        }
+      }
+    ];
+
+    // Variables de Estado y Contexto Conversacional
+    let activeDevice = MOCK_DATABASE[0]; // Por defecto CM4777 para arrancar con contexto
+    let lastSummaryQuote = 'IdeaPad Slim 3 15IRH10';
+    const messagesHook = document.getElementById('messagesHook');
+    const chatMessages = document.getElementById('chatMessages');
+    const messageInput = document.getElementById('messageInput');
+    const botStatusText = document.getElementById('botStatusText');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    document.getElementById('initialMsgTime').innerText = getCurrentTime();
+    document.getElementById('liveClock').innerText = getCurrentTime();
+
+    function scrollToBottom() {
+      chatMessages.scrollTo({
+        top: chatMessages.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    function parseWhatsAppMarkdown(text) {
+      let html = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Code blocks `code`
+      html = html.replace(/`([^`]+)`/g, '<code class="bg-[#182229] px-1.5 py-0.5 rounded text-amber-300 font-mono text-[12px] border border-white/5">$1</code>');
+
+      // Bold *text*
+      html = html.replace(/\*([^\*]+)\*/g, '<strong class="font-bold text-white">$1</strong>');
+
+      // Italic _text_
+      html = html.replace(/_([^_]+)_/g, '<em class="italic text-slate-300">$1</em>');
+
+      // Line breaks
+      html = html.replace(/\n/g, '<br>');
+
+      return html;
+    }
+
+    function findDevice(query) {
+      const clean = query.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+      if (!clean) return null;
+      return MOCK_DATABASE.find(d => 
+        (d.art_fravega && d.art_fravega.toUpperCase() === clean) ||
+        (d.art_on_city && d.art_on_city.toUpperCase() === clean) ||
+        (d.art_cetrogar && d.art_cetrogar.toUpperCase() === clean) ||
+        (d.art_naldo && d.art_naldo.toUpperCase() === clean) ||
+        (d.part_number && d.part_number.toUpperCase() === clean)
+      );
+    }
+
+    function getDisplaySku(dev) {
+      return dev.art_fravega || dev.art_on_city || dev.part_number;
+    }
+
+    // A) Estructura Oficial de Ficha Base
+    function buildOfficialSheet(dev, searchCode) {
+      const ramSupport = dev.ram_ampliable ? 'SÍ ✅' : 'NO ❌';
+      const storageSupport = dev.storage_ampliable ? 'SÍ ✅' : 'NO ❌';
+
+      let msg = `💻 *${dev.nombre}*\n`;
+      msg += `🏷️ *Part Number:* \`${dev.part_number}\`\n`;
+      msg += `🔍 *Búsqueda:* ${searchCode}\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+      // RAM
+      msg += `🧠 *MEMORIA RAM*\n`;
+      msg += `• *Ampliable:* ${ramSupport}\n`;
+      msg += `• *Total de Módulos:* ${dev.ram_total_modulos} _(incluye módulos soldados y removibles)_\n`;
+      msg += `• *Módulos Ocupados:* ${dev.ram_ocupados} | *Libres:* ${dev.ram_libres}\n`;
+      msg += `• *RAM Máxima:* ${dev.ram_max} GB • *Tipo:* ${dev.ram_tipo}\n\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+      // ALMACENAMIENTO
+      msg += `💾 *ALMACENAMIENTO*\n`;
+      msg += `• *Ampliable:* ${storageSupport}\n`;
+      msg += `• *Máximo Total:* ${dev.storage_max} • *Tipo:* ${dev.storage_tipo}\n\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+      // CPU & GPU
+      msg += `⚙️ *PROCESADOR & GRÁFICOS*\n`;
+      msg += `• *CPU:* ${dev.cpu}\n`;
+      msg += `• *GPU:* ${dev.gpu}\n\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      msg += `ℹ️ _Los datos son a modo informativo, pueden variar sin previo aviso y no constituyen una oferta de venta._`;
+
+      return msg;
+    }
+
+    // B) Respuesta [¿Cómo ampliar?]
+    function buildUpgradeExplanation(dev) {
+      return `💡 *Opciones de Ampliación para ${dev.nombre}:*\n\n` +
+             `• *RAM:* ${dev.ampliacion_detalle.ram}\n\n` +
+             `• *Disco:* ${dev.ampliacion_detalle.disco}\n\n` +
+             `👉 *Argumento de venta:* ${dev.ampliacion_detalle.argumento_venta}`;
+    }
+
+    // C) Respuesta [¿Para qué sirve?]
+    function buildPurposeExplanation(dev) {
+      return `🎯 *Perfil de Uso Recomendado para ${dev.nombre}:*\n\n` +
+             `✅ *Ideal para:* ${dev.perfil_uso.ideal}\n\n` +
+             `⚠️ *Apto con limitaciones:* ${dev.perfil_uso.limitado}\n\n` +
+             `❌ *No recomendado para:* ${dev.perfil_uso.no_recomendado}`;
+    }
+
+    // D) Comparativa A vs B
+    function buildComparison(devA, devB) {
+      const skuA = getDisplaySku(devA);
+      const skuB = getDisplaySku(devB);
+
+      let msg = `⚖️ *COMPARATIVA: ${devA.nombre} vs ${devB.nombre}*\n`;
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+      // 1. Procesador y Gráficos
+      msg += `1️⃣ *PROCESADOR Y GRÁFICOS (CPU/GPU):*\n`;
+      msg += `• *${skuA}:* ${devA.cpu} | ${devA.gpu}\n`;
+      msg += `• *${skuB}:* ${devB.cpu} | ${devB.gpu}\n`;
+      if (devA.tiene_dedicada && !devB.tiene_dedicada) {
+        msg += `🏆 *Ganador Gráfico:* *${skuA}* (Placa NVIDIA RTX dedicada con Ray Tracing).\n\n`;
+      } else if (devB.tiene_dedicada && !devA.tiene_dedicada) {
+        msg += `🏆 *Ganador Gráfico:* *${skuB}* (Placa NVIDIA RTX dedicada con Ray Tracing).\n\n`;
+      } else {
+        msg += `🏆 *Veredicto:* Rendimiento equiparable en gráficos integrados de uso diario.\n\n`;
+      }
+
+      // 2. Pantalla y Formato
+      msg += `2️⃣ *PANTALLA Y FORMATO:*\n`;
+      msg += `• *${skuA}:* ${devA.pantalla} (${devA.tipo})\n`;
+      msg += `• *${skuB}:* ${devB.pantalla} (${devB.tipo})\n\n`;
+
+      // 3. Ampliabilidad y Vida Útil
+      msg += `3️⃣ *AMPLIACIÓN Y DURABILIDAD:*\n`;
+      const ramA = devA.ram_ampliable ? `RAM ampliable hasta ${devA.ram_max}GB ✅` : `RAM soldada fija ❌`;
+      const ramB = devB.ram_ampliable ? `RAM ampliable hasta ${devB.ram_max}GB ✅` : `RAM soldada fija ❌`;
+      msg += `• *${skuA}:* ${ramA} | SSD ${devA.storage_max}\n`;
+      msg += `• *${skuB}:* ${ramB} | SSD ${devB.storage_max}\n\n`;
+
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      msg += `💡 *Recomendación en salón:* Ofrecer *${skuA}* si busca portabilidad/ampliación o *${skuB}* según prioridad de presupuesto o potencia gráfica.`;
+
+      return msg;
+    }
+
+    // Disparador de chips
+    function triggerSearch(text) {
+      messageInput.value = text;
+      handleUserSubmit();
+    }
+
+    function handleUserSubmit() {
+      const text = messageInput.value.trim();
+      if (!text) return;
+      messageInput.value = '';
+      sendUserMessage(text, null);
+      processHybridQuery(text);
+    }
+
+    // Renderiza burbuja de usuario con Cita Previa (Quoted Reply)
+    function sendUserMessage(text, quoteText) {
+      playMessageSentSound();
+      const msgId = 'user-msg-' + Date.now();
+      const timeStr = getCurrentTime();
+
+      let quoteHTML = '';
+      if (quoteText) {
+        quoteHTML = `
+          <div class="bg-[#025143] rounded-lg p-2 mb-1.5 border-l-4 border-wa-green text-[11px] leading-tight select-none">
+            <span class="text-wa-green font-semibold block text-[11px] mb-0.5">Lenovo Retail Argentina</span>
+            <span class="text-emerald-100/80 truncate block">${quoteText}</span>
+          </div>
+        `;
+      }
+
+      const bubbleHTML = `
+        <div class="self-end max-w-[85%] bg-wa-userBubble hover:bg-wa-userBubbleHover text-wa-textPrimary rounded-xl rounded-tr-none p-3 shadow-md relative group transition-all">
+          ${quoteHTML}
+          <div class="text-[13px] leading-relaxed break-words font-medium">${text}</div>
+          <div class="text-[10px] text-emerald-200/70 text-right mt-1 flex items-center justify-end gap-1 select-none">
+            <span>${timeStr}</span>
+            <span id="check-${msgId}" class="inline-flex items-center text-slate-300">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 16 15" fill="none">
+                <path d="M15 3.5L6.5 12L1 6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      `;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'flex flex-col items-end';
+      wrapper.innerHTML = bubbleHTML;
+      messagesHook.appendChild(wrapper);
+      scrollToBottom();
+
+      // Animación de checks (Gris -> Doble Azul)
+      setTimeout(() => {
+        const checkEl = document.getElementById(`check-${msgId}`);
+        if (checkEl) {
+          checkEl.innerHTML = `
+            <svg class="w-4 h-3.5" viewBox="0 0 16 11" fill="none">
+              <path d="M11 1.5L4.5 8L1 4.5M15 1.5L8.5 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          `;
+        }
+      }, 200);
+
+      setTimeout(() => {
+        const checkEl = document.getElementById(`check-${msgId}`);
+        if (checkEl) {
+          checkEl.className = 'inline-flex items-center text-wa-teal';
+          checkEl.innerHTML = `
+            <svg class="w-4 h-3.5" viewBox="0 0 16 11" fill="none">
+              <path d="M11 1.5L4.5 8L1 4.5M15 1.5L8.5 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          `;
+        }
+      }, 400);
+    }
+
+    // Clic en Quick Reply Button
+    function handleQuickReplyClick(buttonEl, action, summaryText) {
+      // Inhabilitar botones hermanos
+      const container = buttonEl.closest('.divide-y');
+      if (container) {
+        container.querySelectorAll('button').forEach(btn => {
+          btn.disabled = true;
+          btn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        });
+      }
+
+      let userText = '';
+      if (action === 'COMO_AMPLIAR') {
+        userText = '💡 ¿Cómo ampliar?';
+      } else if (action === 'PARA_QUE_SIRVE') {
+        userText = '🎯 ¿Para qué sirve?';
+      } else if (action === 'ESCRIBIR_SKU') {
+        userText = '🔍 Escribí el artículo/SKU';
+      } else if (action === 'COMPARATIVA_SKU') {
+        userText = '⚖️ Comparativa de artículo/SKU';
+      } else if (action === 'ESCRIBIR_PREGUNTA') {
+        userText = '💬 Escribir pregunta';
+      } else if (action === 'OTRO_SKU') {
+        userText = '🔍 Consultar otro SKU';
+      } else if (action === 'PROBAR_CM4777') {
+        userText = '🔍 Probar CM4777 (Slim 3)';
+      } else if (action === 'PROBAR_LOQ') {
+        userText = '🎮 Probar LOQ Gamer';
+      } else {
+        userText = action;
+      }
+
+      sendUserMessage(userText, summaryText || lastSummaryQuote);
+
+      if (action === 'COMO_AMPLIAR') {
+        deliverBotReply((dev) => buildUpgradeExplanation(dev), [
+          { text: '🎯 ¿Para qué sirve?', action: 'PARA_QUE_SIRVE' },
+          { text: '🔍 Consultar otro SKU', action: 'OTRO_SKU' }
+        ]);
+      } else if (action === 'PARA_QUE_SIRVE') {
+        deliverBotReply((dev) => buildPurposeExplanation(dev), [
+          { text: '💡 ¿Cómo ampliar?', action: 'COMO_AMPLIAR' },
+          { text: '🔍 Consultar otro SKU', action: 'OTRO_SKU' }
+        ]);
+      } else if (action === 'ESCRIBIR_SKU') {
+        deliverBotReply(() => {
+          return 'Escribí el código de artículo (SKU de Frávega, On City, Cetrogar, Naldo) o Part Number (MTM) de Lenovo que querés consultar 👇\n\n' +
+                 '_Ejemplos para probar:_\n' +
+                 '• *CM4777* (IdeaPad Slim 3 15IRH10)\n' +
+                 '• *364549* (IdeaCentre AIO 3 24IAP7)\n' +
+                 '• *82VG0007AR* (IdeaPad 1 15AMN7)\n' +
+                 '• *83GS003PAR* (Lenovo LOQ Gamer RTX 3050)';
+        }, [
+          { text: '🔍 Probar CM4777', action: 'PROBAR_CM4777' },
+          { text: '🎮 Probar LOQ Gamer', action: 'PROBAR_LOQ' }
+        ]);
+        setTimeout(() => messageInput.focus(), 850);
+      } else if (action === 'COMPARATIVA_SKU') {
+        deliverBotReply(() => {
+          return 'Para comparar dos modelos cara a cara en salón, escribí los dos códigos separados por *vs* 👇\n\n' +
+                 '_Ejemplos listos para probar:_\n' +
+                 '• *CM4777 vs 364549*\n' +
+                 '• *CM4777 vs 82VG0007AR*';
+        }, [
+          { text: '⚖️ Probar CM4777 vs 364549', action: 'CM4777 vs 364549' },
+          { text: '🔍 Consultar otro SKU', action: 'OTRO_SKU' }
+        ]);
+        setTimeout(() => messageInput.focus(), 850);
+      } else if (action === 'ESCRIBIR_PREGUNTA') {
+        deliverBotReply(() => {
+          return 'Podés hacer cualquier consulta técnica o comercial en lenguaje natural sobre el equipo frente a tu cliente 👇\n\n' +
+                 '_Ejemplos que podés escribir:_\n' +
+                 '• *¿Sirve para AutoCAD o arquitectura?*\n' +
+                 '• *¿Corre Warzone o juegos pesados?*\n' +
+                 '• *¿Qué pantalla tiene y cuánto pesa?*';
+        }, [
+          { text: '📐 ¿Sirve para AutoCAD?', action: '¿Sirve para AutoCAD?' },
+          { text: '🎮 ¿Corre juegos?', action: '¿Corre juegos?' }
+        ]);
+        setTimeout(() => messageInput.focus(), 850);
+      } else if (action === 'OTRO_SKU') {
+        deliverBotReply(() => {
+          return 'Escribí el SKU o Part Number del equipo que querés consultar 👇\n' +
+                 '_Ejemplos: *CM4777*, *364549*, *82VG0007AR*, *83GS003PAR*._';
+        }, [
+          { text: '🔍 Probar CM4777', action: 'PROBAR_CM4777' },
+          { text: '🎮 Probar LOQ Gamer', action: 'PROBAR_LOQ' }
+        ]);
+        setTimeout(() => messageInput.focus(), 850);
+      } else if (action === 'PROBAR_CM4777') {
+        processHybridQuery('CM4777');
+      } else if (action === 'PROBAR_LOQ') {
+        processHybridQuery('83GS003PAR');
+      } else {
+        processHybridQuery(action);
+      }
+    }
+
+    // Despacho de respuesta con indicador "escribiendo..." de 800ms
+    function deliverBotReply(replyGenerator, quickReplies = []) {
+      botStatusText.innerText = 'escribiendo...';
+      botStatusText.className = 'text-xs text-wa-teal font-medium tracking-wide';
+      typingIndicator.classList.remove('hidden');
+      typingIndicator.classList.add('flex');
+      scrollToBottom();
+
+      setTimeout(() => {
+        typingIndicator.classList.add('hidden');
+        typingIndicator.classList.remove('flex');
+        botStatusText.innerText = 'en línea';
+        botStatusText.className = 'text-xs text-wa-green transition-all duration-200';
+
+        const rawText = replyGenerator(activeDevice);
+        lastSummaryQuote = rawText.split('\n')[0].replace(/[*_`]/g, '');
+        const parsedHTML = parseWhatsAppMarkdown(rawText);
+        const timeStr = getCurrentTime();
+
+        let buttonsHTML = '';
+        if (quickReplies && quickReplies.length > 0) {
+          const buttonsList = quickReplies.map(btn => `
+            <button onclick="handleQuickReplyClick(this, '${btn.action}', '${lastSummaryQuote}')" class="w-full py-2.5 px-3 hover:bg-[#233138] active:bg-[#182229] transition-all flex items-center justify-center gap-2 group text-center">
+              <span class="text-wa-green text-sm font-bold transition-transform group-hover:-translate-x-0.5">↩</span>
+              <span class="text-wa-green font-medium text-[13px]">${btn.text}</span>
+            </button>
+          `).join('');
+
+          buttonsHTML = `
+            <div class="bg-wa-buttonBg rounded-b-xl border-x border-b border-[#2a3942]/50 shadow-md divide-y divide-[#2a3942]/70 overflow-hidden">
+              ${buttonsList}
+            </div>
+          `;
+        }
+
+        const botBubbleHTML = `
+          <div class="self-start max-w-[90%] w-full sm:w-auto animate-fade-in">
+            <div class="bg-wa-botBubble text-wa-textPrimary ${quickReplies.length > 0 ? 'rounded-t-xl rounded-tr-xl' : 'rounded-xl rounded-tl-none'} p-3.5 shadow-md border border-[#2a3942]/50 relative">
+              <div class="text-[13px] leading-relaxed">${parsedHTML}</div>
+              <div class="text-[10px] text-wa-textSecondary text-right mt-1.5 flex items-center justify-end gap-1">
+                <span>${timeStr}</span>
+              </div>
+            </div>
+            ${buttonsHTML}
+          </div>
+        `;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'flex flex-col items-start';
+        wrapper.innerHTML = botBubbleHTML;
+        messagesHook.appendChild(wrapper);
+
+        playMessageReceivedSound();
+        scrollToBottom();
+      }, 800);
+    }
+
+    // MOTOR DE CONSULTAS HÍBRIDO (Inteligencia Conversacional + Contexto)
+    function processHybridQuery(input) {
+      const clean = input.trim();
+      const upper = clean.toUpperCase();
+
+      // 1. Saludos
+      const greetings = ['HOLA', 'BUENAS', 'BUEN DIA', 'BUENOS DIAS', 'BUENAS TARDES', 'BUENAS NOCHES', 'AYUDA', 'HELP', 'MENU', 'INICIO'];
+      if (greetings.includes(upper)) {
+        deliverBotReply(() => {
+          return `👋 *¡Hola! Asistente Lenovo Retail*\n\n` +
+                 `Tu copiloto técnico para cerrar ventas en góndola (Frávega, On City, Cetrogar, Naldo).\n\n` +
+                 `👉 *¿Qué querés hacer? Elegí una opción:*`;
+        }, [
+          { text: '🔍 Escribí el artículo/SKU', action: 'ESCRIBIR_SKU' },
+          { text: '⚖️ Comparativa de artículo/SKU', action: 'COMPARATIVA_SKU' },
+          { text: '💬 Escribir pregunta', action: 'ESCRIBIR_PREGUNTA' }
+        ]);
+        return;
+      }
+
+      // 2. Comparativas A vs B ("SKU1 vs SKU2")
+      const vsMatch = clean.match(/^([A-Z0-9-]+)\s+(?:VS|CONTRA|V\/S)\s+([A-Z0-9-]+)$/i);
+      if (vsMatch) {
+        const devA = findDevice(vsMatch[1]);
+        const devB = findDevice(vsMatch[2]);
+
+        if (!devA && !devB) {
+          deliverBotReply(() => `❌ No encontré ninguno de los dos equipos consultados (*${vsMatch[1]}* ni *${vsMatch[2]}*).`, [
+            { text: '🔍 Probar CM4777', action: 'PROBAR_CM4777' }
+          ]);
+          return;
+        }
+        if (!devA) {
+          deliverBotReply(() => `❌ Encontré *${vsMatch[2]}*, pero *${vsMatch[1]}* no está registrado.`);
+          return;
+        }
+        if (!devB) {
+          deliverBotReply(() => `❌ Encontré *${vsMatch[1]}*, pero *${vsMatch[2]}* no está registrado.`);
+          return;
+        }
+
+        activeDevice = devA;
+        deliverBotReply(() => buildComparison(devA, devB), [
+          { text: `💡 ¿Cómo ampliar ${getDisplaySku(devA)}?`, action: 'COMO_AMPLIAR' },
+          { text: '🔍 Consultar otro SKU', action: 'OTRO_SKU' }
+        ]);
+        return;
+      }
+
+      // 3. Búsqueda directa por SKU o MTM
+      const directDevice = findDevice(clean);
+      if (directDevice) {
+        activeDevice = directDevice;
+        deliverBotReply(() => buildOfficialSheet(directDevice, clean), [
+          { text: '💡 ¿Cómo ampliar?', action: 'COMO_AMPLIAR' },
+          { text: '🎯 ¿Para qué sirve?', action: 'PARA_QUE_SIRVE' }
+        ]);
+        return;
+      }
+
+      // 4. Preguntas Libres en Lenguaje Natural (Analizando el equipo activo en contexto)
+      const current = activeDevice || MOCK_DATABASE[0];
+      const lower = clean.toLowerCase();
+
+      // 4.1 Diseño, Arquitectura, CAD, Revit
+      if (lower.includes('autocad') || lower.includes('cad') || lower.includes('revit') || lower.includes('arquitectura') || lower.includes('diseño') || lower.includes('photoshop') || lower.includes('illustrator')) {
+        deliverBotReply(() => {
+          let r = `📐 *Aptitud para Diseño / Arquitectura en ${current.nombre}:*\n\n`;
+          if (current.tiene_dedicada) {
+            r += `🟢 *100% APTO Y FLUIDO (2D y 3D Avanzado)*\n`;
+            r += `• Gracias a su placa dedicada *${current.gpu}*, este equipo se banca proyectos 3D complejos en AutoCAD, renderizado en Revit BIM, Lumion y suite completa de Adobe sin demoras.\n`;
+            r += `👉 *Tip comercial:* Es el equipo ideal para recomendar a estudiantes de arquitectura o ingenieros.`;
+          } else {
+            r += `🟡 *Apto Fluido para 2D / Limitado en 3D Pesado*\n`;
+            r += `• Su procesador *${current.cpu}* y memoria corren *AutoCAD 2D, Photoshop e Illustrator* con total fluidez para planos y diseño gráfico estándar.\n`;
+            r += `• Para *Revit 3D pesado o renders con texturas fotorrealistas*, se queda corto por no poseer placa dedicada NVIDIA RTX.\n`;
+            r += `👉 *Tip comercial:* Si el cliente va a renderizar intensivamente en 3D, recomendarle la línea *Lenovo LOQ Gamer con RTX* (MTM 83GS003PAR).`;
+          }
+          return r;
+        }, [
+          { text: '💡 ¿Cómo ampliar?', action: 'COMO_AMPLIAR' },
+          { text: '🎯 ¿Para qué sirve?', action: 'PARA_QUE_SIRVE' }
+        ]);
+        return;
+      }
+
+      // 4.2 Juegos / Gaming
+      if (lower.includes('juego') || lower.includes('juegos') || lower.includes('gaming') || lower.includes('jugar') || lower.includes('fortnite') || lower.includes('warzone') || lower.includes('lol') || lower.includes('roblox') || lower.includes('valorant') || lower.includes('gta')) {
+        deliverBotReply(() => {
+          let r = `🎮 *Aptitud de Gaming en ${current.nombre}:*\n\n`;
+          if (current.tiene_dedicada) {
+            r += `🟢 *EQUIPO GAMER 100% (Alto Rendimiento)*\n`;
+            r += `• Placa de video: *${current.gpu}*.\n`;
+            r += `• Corre *Warzone, Cyberpunk, GTA V, EA Sports FC / FIFA* en calidad alta y *Fortnite / Valorant a más de 120 FPS* en su pantalla de 144Hz.\n`;
+            r += `👉 *Argumento de salón:* Excelente relación precio/calidad gamer con refrigeración dedicada.`;
+          } else {
+            r += `🟡 *Apto Esports / No apto Juegos AAA Pesados*\n`;
+            r += `• Posee gráficos integrados *${current.gpu}*. Es perfectamente apto para títulos livianos y esports como *League of Legends (LoL), Roblox y Valorant* en 1080p con ajustes medios.\n`;
+            r += `• *No es apto* para juegos demandantes tipo *Warzone, Cyberpunk o GTA V en alta calidad*.\n`;
+            r += `👉 *Tip de venta:* Para gaming competitivo y shooters pesados, guiar al cliente hacia el *Lenovo LOQ* (MTM 83GS003PAR).`;
+          }
+          return r;
+        }, [
+          { text: '💡 ¿Cómo ampliar?', action: 'COMO_AMPLIAR' },
+          { text: '🎯 ¿Para qué sirve?', action: 'PARA_QUE_SIRVE' }
+        ]);
+        return;
+      }
+
+      // 4.3 Pantalla, Pantallas, Panel, Teclado, Peso
+      if (lower.includes('pantalla') || lower.includes('display') || lower.includes('teclado') || lower.includes('peso') || lower.includes('panel') || lower.includes('pesa')) {
+        deliverBotReply(() => {
+          let r = `🖥️ *Detalles de Pantalla y Chasis de ${current.nombre}:*\n\n`;
+          r += `• *Pantalla:* ${current.pantalla}.\n`;
+          r += `• *Teclado Numérico:* ${current.teclado_numerico ? 'SÍ incluye teclado numérico lateral físico ✅' : 'No incluye teclado numérico lateral'}.\n`;
+          r += `• *Formato y Peso:* ${current.peso} (${current.tipo}).\n\n`;
+          r += `👉 *Dato clave para venta:* Pantalla antirreflejo para jornadas largas sin fatiga visual.`;
+          return r;
+        }, [
+          { text: '💡 ¿Cómo ampliar?', action: 'COMO_AMPLIAR' },
+          { text: '🎯 ¿Para qué sirve?', action: 'PARA_QUE_SIRVE' }
+        ]);
+        return;
+      }
+
+      // 4.4 Si no coincide con nada conocido
+      deliverBotReply(() => {
+        return `❌ No encontré información para: *${clean}*.\n\n` +
+               `Probá escribiendo un SKU de retail (ej: *CM4777*, *364549*), un Part Number (*83GS003PAR*) o preguntando directamente sobre el equipo activo: *¿sirve para autocad?*, *¿corre juegos?* o *¿cómo ampliar?*.`;
+      }, [
+        { text: '🔍 Probar CM4777', action: 'PROBAR_CM4777' },
+        { text: '🎮 Probar LOQ Gamer', action: 'PROBAR_LOQ' }
+      ]);
+    }
+
+    // Reset Demo
+    document.getElementById('resetDemoBtn').addEventListener('click', () => {
+      messagesHook.innerHTML = '';
+      messageInput.value = '';
+      activeDevice = MOCK_DATABASE[0];
+      lastSummaryQuote = 'IdeaPad Slim 3 15IRH10';
+      typingIndicator.classList.add('hidden');
+      typingIndicator.classList.remove('flex');
+      botStatusText.innerText = 'en línea';
+      botStatusText.className = 'text-xs text-wa-green';
+      scrollToBottom();
+    });
+
+    // Toggle View (Phone vs Fullscreen)
+    const deviceFrame = document.getElementById('deviceFrame');
+    const mainContainer = document.getElementById('mainContainer');
+    const phoneTopBar = document.getElementById('phoneTopBar');
+    const viewModeText = document.getElementById('viewModeText');
+    let isFullscreen = false;
+
+    document.getElementById('toggleViewBtn').addEventListener('click', () => {
+      isFullscreen = !isFullscreen;
+      if (isFullscreen) {
+        deviceFrame.className = 'w-full h-full bg-[#121b22] flex flex-col overflow-hidden relative transition-all duration-300';
+        mainContainer.className = 'flex-1 flex p-0 bg-[#0b141a] overflow-hidden relative';
+        phoneTopBar.classList.add('hidden');
+        phoneTopBar.classList.remove('sm:flex');
+        viewModeText.innerText = 'Vista Smartphone';
+      } else {
+        deviceFrame.className = 'w-full max-w-[460px] h-full sm:h-[860px] max-h-full sm:max-h-[96vh] bg-[#121b22] sm:rounded-[42px] sm:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_0_12px_#1e293b,0_0_0_14px_#334155] flex flex-col overflow-hidden relative transition-all duration-300';
+        mainContainer.className = 'flex-1 flex items-center justify-center p-0 sm:p-4 bg-gradient-to-b from-slate-950 via-slate-900 to-black overflow-hidden relative';
+        phoneTopBar.classList.remove('hidden');
+        phoneTopBar.classList.add('sm:flex');
+        viewModeText.innerText = 'Pantalla Completa';
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Detección automática de PowerPoint Web Viewer / Modo Iframe
+      const urlParams = new URLSearchParams(window.location.search);
+      const isEmbedded = window.self !== window.top || urlParams.get('embed') === 'true' || urlParams.get('ppt') === 'true';
+
+      if (isEmbedded) {
+        const topHeader = document.querySelector('header');
+        if (topHeader) topHeader.style.display = 'none';
+        if (mainContainer) {
+          mainContainer.style.padding = '0';
+          mainContainer.style.background = '#0b141a';
+        }
+        if (deviceFrame) {
+          deviceFrame.style.maxWidth = '100%';
+          deviceFrame.style.height = '100%';
+          deviceFrame.style.borderRadius = '0';
+          deviceFrame.style.boxShadow = 'none';
+        }
+        if (phoneTopBar) phoneTopBar.style.display = 'none';
+      }
+
+      messageInput.focus();
+    });
+  </script>
+</body>
+</html>
